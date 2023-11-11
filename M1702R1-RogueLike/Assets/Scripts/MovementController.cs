@@ -1,14 +1,19 @@
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.Playables;
 
 public class MovementController : MonoBehaviour
 {
 
     private PlayerControls playerControls;
     public new Rigidbody2D rigidbody;
-    private Vector3 direction = Vector2.zero;
-    private int speed = 5;
+    private Animator playerController;
+
+    private Vector2 direction = Vector2.zero;
+
+    private Vector2 lastMoveDirection;
+    private readonly int  speed = 5;
 
     private void OnEnable()
     {
@@ -21,7 +26,8 @@ public class MovementController : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody= GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        playerController = GetComponent<Animator>();
 
         playerControls = new PlayerControls();
 
@@ -33,16 +39,34 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         MovePlayer();
+        Animate();
     }
     private void ReadInput(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
+
+        if ((input.x == 0 && input.y == 0) && direction.x != 0 || direction.y != 0)
+        {
+ 
+            lastMoveDirection = direction.normalized;
+        }
+
         direction.x = input.x;
-        direction.y = input.y;       
+        direction.y = input.y;
+
     }
     private void MovePlayer()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        rigidbody.velocity = new Vector2(direction.x * speed, direction.y*speed);
+    }
+
+    private void Animate()
+    {
+        playerController.SetFloat("AnimMoveX", direction.x);
+        playerController.SetFloat("AnimMoveY", direction.y);
+        playerController.SetFloat("AnimMoveMagnitude", direction.magnitude);
+        playerController.SetFloat("AnimLastMoveX", lastMoveDirection.x);
+        playerController.SetFloat("AnimLastMoveY", lastMoveDirection.y);
     }
 
 }
