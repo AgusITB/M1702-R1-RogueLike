@@ -1,7 +1,9 @@
+using System.Collections;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class MovementController : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class MovementController : MonoBehaviour
     private Vector2 direction = Vector2.zero;
 
     private Vector2 lastMoveDirection;
-    private readonly int  speed = 5;
+    private readonly int speed = 5;
 
     private void OnEnable()
     {
@@ -31,8 +33,8 @@ public class MovementController : MonoBehaviour
 
         playerControls = new PlayerControls();
 
-        playerControls.Gameplay.Move.performed += ReadInput;
-        playerControls.Gameplay.Move.canceled += ReadInput;
+        playerControls.Gameplay.Move.performed += ReadInput2;
+        playerControls.Gameplay.Move.canceled += ReadInput2;
     }
 
     // Update is called once per frame
@@ -41,23 +43,27 @@ public class MovementController : MonoBehaviour
         MovePlayer();
         Animate();
     }
-    private void ReadInput(InputAction.CallbackContext context)
+    private void ReadInput2(InputAction.CallbackContext context)
+    {
+        StartCoroutine(Release(context));
+    }
+    private IEnumerator Release(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
 
-        if ((input.x == 0 && input.y == 0) && direction.x != 0 || direction.y != 0)
-        {
- 
-            lastMoveDirection = direction.normalized;
-        }
+        lastMoveDirection.x = direction.x;
+        lastMoveDirection.y = direction.y;
+
+        if (direction.magnitude < 0.05) rigidbody.velocity = Vector2.zero;
+
+        yield return new WaitForSeconds(0.05f);
 
         direction.x = input.x;
         direction.y = input.y;
-
     }
     private void MovePlayer()
     {
-        rigidbody.velocity = new Vector2(direction.x * speed, direction.y*speed);
+        rigidbody.velocity = new Vector2(direction.x * speed, direction.y * speed);
     }
 
     private void Animate()
