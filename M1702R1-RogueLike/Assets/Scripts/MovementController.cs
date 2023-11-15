@@ -33,8 +33,8 @@ public class MovementController : MonoBehaviour
 
         playerControls = new PlayerControls();
 
-        playerControls.Gameplay.Move.performed += ReadInput2;
-        playerControls.Gameplay.Move.canceled += ReadInput2;
+        playerControls.Gameplay.Move.performed += ReadInput;
+        playerControls.Gameplay.Move.canceled += ReadInput;
     }
 
     // Update is called once per frame
@@ -43,7 +43,7 @@ public class MovementController : MonoBehaviour
         MovePlayer();
         Animate();
     }
-    private void ReadInput2(InputAction.CallbackContext context)
+    private void ReadInput(InputAction.CallbackContext context)
     {
         StartCoroutine(Release(context));
     }
