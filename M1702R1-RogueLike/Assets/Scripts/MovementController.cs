@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -16,6 +17,10 @@ public class MovementController : MonoBehaviour
 
     private Vector2 lastMoveDirection;
     private readonly int speed = 5;
+    private float meleeCD = 1.5f;
+    private float meleeIsAllowed;
+
+
 
     private void OnEnable()
     {
@@ -37,6 +42,7 @@ public class MovementController : MonoBehaviour
         playerControls.Gameplay.Move.canceled += Move;
 
         playerControls.Gameplay.Attack.performed += Attack;
+        playerControls.Gameplay.Move.canceled += Attack;
     }
 
     // Update is called once per frame
@@ -49,9 +55,20 @@ public class MovementController : MonoBehaviour
     {
         StartCoroutine(Release(context));
     }
-    private void Attack(InputAction.CallbackContext context) 
+    private void Attack(InputAction.CallbackContext context)
     {
-        StartCoroutine(Atacar());
+        if (playerController.GetFloat("AnimMoveMagnitude") == 0)
+        {
+            playerController.SetFloat("AnimMoveX", playerController.GetFloat("AnimLastMoveX"));
+            playerController.SetFloat("AnimMoveY", playerController.GetFloat("AnimLastMoveY"));
+        }
+
+        if (Time.time > meleeIsAllowed)
+        {
+            StartCoroutine(Atacar());
+        }
+    
+       
     }
 
 
@@ -59,8 +76,9 @@ public class MovementController : MonoBehaviour
     private IEnumerator Atacar()
     {
         playerController.SetBool("MeleeAttack", true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         playerController.SetBool("MeleeAttack", false);
+        meleeIsAllowed = Time.time + meleeCD;
     }
     private IEnumerator Release(InputAction.CallbackContext context)
     {
