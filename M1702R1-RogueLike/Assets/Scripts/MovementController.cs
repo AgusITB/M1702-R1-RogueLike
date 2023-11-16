@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     private PlayerControls playerControls;
     public new Rigidbody2D rigidbody;
     private Animator playerController;
+   
 
     private Vector2 direction = Vector2.zero;
 
@@ -33,6 +34,8 @@ public class MovementController : MonoBehaviour
 
         playerControls.Gameplay.Move.performed += ReadInput;
         playerControls.Gameplay.Move.canceled += ReadInput;
+
+        playerControls.Gameplay.RangeAttack.performed += Bullet.Instance.Disparar;
     }
 
     // Update is called once per frame
