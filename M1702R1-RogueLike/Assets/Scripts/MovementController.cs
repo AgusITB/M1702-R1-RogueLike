@@ -33,8 +33,10 @@ public class MovementController : MonoBehaviour
 
         playerControls = new PlayerControls();
 
-        playerControls.Gameplay.Move.performed += ReadInput;
-        playerControls.Gameplay.Move.canceled += ReadInput;
+        playerControls.Gameplay.Move.performed += Move;
+        playerControls.Gameplay.Move.canceled += Move;
+
+        playerControls.Gameplay.Attack.performed += Attack;
     }
 
     // Update is called once per frame
@@ -43,9 +45,22 @@ public class MovementController : MonoBehaviour
         MovePlayer();
         Animate();
     }
-    private void ReadInput(InputAction.CallbackContext context)
+    private void Move(InputAction.CallbackContext context)
     {
         StartCoroutine(Release(context));
+    }
+    private void Attack(InputAction.CallbackContext context) 
+    {
+        StartCoroutine(Atacar());
+    }
+
+
+
+    private IEnumerator Atacar()
+    {
+        playerController.SetBool("MeleeAttack", true);
+        yield return new WaitForSeconds(1f);
+        playerController.SetBool("MeleeAttack", false);
     }
     private IEnumerator Release(InputAction.CallbackContext context)
     {
