@@ -40,46 +40,33 @@ public class MovementController : MonoBehaviour
 
         playerControls.Gameplay.Move.performed += Move;
         playerControls.Gameplay.Move.canceled += Move;
-
         playerControls.Gameplay.Attack.performed += Attack;
-        playerControls.Gameplay.Move.canceled += Attack;
+
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        MovePlayer();
-        Animate();
-    }
+
     private void Move(InputAction.CallbackContext context)
     {
         StartCoroutine(Release(context));
     }
     private void Attack(InputAction.CallbackContext context)
     {
-        if (playerController.GetFloat("AnimMoveMagnitude") == 0)
-        {
-            playerController.SetFloat("AnimMoveX", playerController.GetFloat("AnimLastMoveX"));
-            playerController.SetFloat("AnimMoveY", playerController.GetFloat("AnimLastMoveY"));
-        }
-
         if (Time.time > meleeIsAllowed)
         {
-            StartCoroutine(Atacar());
+            StartCoroutine(AnimAtack());
         }
-    
-       
     }
 
-
-
-    private IEnumerator Atacar()
+    private IEnumerator AnimAtack()
     {
         playerController.SetBool("MeleeAttack", true);
         yield return new WaitForSeconds(0.8f);
         playerController.SetBool("MeleeAttack", false);
         meleeIsAllowed = Time.time + meleeCD;
+        Animate();
     }
+
     private IEnumerator Release(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
@@ -93,6 +80,8 @@ public class MovementController : MonoBehaviour
 
         direction.x = input.x;
         direction.y = input.y;
+        MovePlayer();
+        Animate();
     }
     private void MovePlayer()
     {
@@ -103,6 +92,16 @@ public class MovementController : MonoBehaviour
     {
         playerController.SetFloat("AnimMoveX", direction.x);
         playerController.SetFloat("AnimMoveY", direction.y);
+
+        playerController.SetFloat("AttackMoveX", direction.x);
+        playerController.SetFloat("AttackMoveY", direction.y);
+
+        if (direction.magnitude < 0.1)
+        {
+            playerController.SetFloat("AttackMoveX", lastMoveDirection.x);
+            playerController.SetFloat("AttackMoveY", lastMoveDirection.y);
+        }
+
         playerController.SetFloat("AnimMoveMagnitude", direction.magnitude);
         playerController.SetFloat("AnimLastMoveX", lastMoveDirection.x);
         playerController.SetFloat("AnimLastMoveY", lastMoveDirection.y);
