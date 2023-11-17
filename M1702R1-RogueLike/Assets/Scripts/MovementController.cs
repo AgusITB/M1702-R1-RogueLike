@@ -35,7 +35,7 @@ public class MovementController : MonoBehaviour
         playerControls.Gameplay.Move.performed += ReadInput;
         playerControls.Gameplay.Move.canceled += ReadInput;
 
-        playerControls.Gameplay.RangeAttack.performed += Bullet.Instance.Disparar;
+        //playerControls.Gameplay.RangeAttack.performed += Bullet.Instance.Disparar;
     }
 
     // Update is called once per frame
