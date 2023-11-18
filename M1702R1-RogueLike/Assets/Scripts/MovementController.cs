@@ -9,7 +9,10 @@ public class MovementController : MonoBehaviour
     private PlayerControls playerControls;
     public new Rigidbody2D rigidbody;
     private Animator playerController;
-   
+
+    [SerializeField]private GameObject bullet;
+    [SerializeField]private Transform bulletDirection;
+
 
     private Vector2 direction = Vector2.zero;
 
@@ -24,6 +27,11 @@ public class MovementController : MonoBehaviour
     {
         playerControls.Disable();
     }
+    private void Start()
+    {
+        playerControls.Gameplay.RangeAttack.performed += _ => PlayerShoot();
+
+    }
 
     private void Awake()
     {
@@ -35,7 +43,7 @@ public class MovementController : MonoBehaviour
         playerControls.Gameplay.Move.performed += ReadInput;
         playerControls.Gameplay.Move.canceled += ReadInput;
 
-        //playerControls.Gameplay.RangeAttack.performed += Bullet.Instance.Disparar;
+       
     }
 
     // Update is called once per frame
@@ -61,6 +69,15 @@ public class MovementController : MonoBehaviour
     private void MovePlayer()
     {
         rigidbody.velocity = new Vector2(direction.x * speed, direction.y*speed);
+    }
+    private void PlayerShoot()
+    {
+        Vector2 mousePosition = playerControls.Gameplay.MousePosition.ReadValue<Vector2>();
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        GameObject g = Instantiate(bullet, bulletDirection.position, bulletDirection.rotation);
+        Debug.Log("Se ha activado la bala");
+        g.SetActive(true);
+    
     }
 
     private void Animate()
