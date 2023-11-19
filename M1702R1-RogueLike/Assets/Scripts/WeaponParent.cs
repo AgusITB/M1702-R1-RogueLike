@@ -26,9 +26,6 @@ public class WeaponParent : MonoBehaviour
     {
         weaponCollider =  GetComponent<Collider2D>();
         weaponRenderer = GetComponent<SpriteRenderer>();
-
-
-    
         weaponCollider.enabled = false;
     }
 
@@ -37,7 +34,9 @@ public class WeaponParent : MonoBehaviour
         if(other.TryGetComponent(out IDamagable obj))
         { 
             Enemy enemy = (Enemy)obj;
+            enemy.AnimateHit();
             enemy.TakeDamage(damage);
+
         }
     }
 

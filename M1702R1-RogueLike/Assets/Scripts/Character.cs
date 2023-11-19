@@ -8,4 +8,7 @@ public class Character : MonoBehaviour
     public int currentHp;
     public int speed;
 
+
+
+ 
 }
