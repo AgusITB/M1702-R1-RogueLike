@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "RangeAttack",
+                    "type": "PassThrough",
+                    "id": "bd4e3f65-64f6-480e-a291-cd3235432b39",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "c005bae3-a59b-49e8-8915-8c98d66343ab",
@@ -146,6 +155,14 @@
                 },
                 {
                     "name": "",
+                    "id": "5175cefe-c504-4cfa-aa7f-3fba367cf589",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RangeAttack",
+                },
+                {
                     "id": "12a5870a-1fe9-48ca-96a8-0c9a679ebe7c",
                     "path": "<Keyboard>/space",
                     "interactions": "",

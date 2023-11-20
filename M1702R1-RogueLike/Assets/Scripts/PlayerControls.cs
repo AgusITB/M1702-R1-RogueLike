@@ -37,6 +37,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""RangeAttack"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""bd4e3f65-64f6-480e-a291-cd3235432b39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""c005bae3-a59b-49e8-8915-8c98d66343ab"",
@@ -167,7 +176,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
+                    ""name"": "" "",
+                    ""id"": ""5175cefe-c504-4cfa-aa7f-3fba367cf589"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RangeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {   
+                     ""name"": "" "",
                     ""id"": ""12a5870a-1fe9-48ca-96a8-0c9a679ebe7c"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -178,7 +198,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
                     ""id"": ""1b03ca6a-777e-4fa6-8172-073b8be8e1fa"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
@@ -196,6 +215,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_RangeAttack = m_Gameplay.FindAction("RangeAttack", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_FollowMouse = m_Gameplay.FindAction("FollowMouse", throwIfNotFound: true);
     }
@@ -260,6 +280,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_RangeAttack;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_FollowMouse;
     public struct GameplayActions
@@ -267,6 +288,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @RangeAttack => m_Wrapper.m_Gameplay_RangeAttack;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @FollowMouse => m_Wrapper.m_Gameplay_FollowMouse;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
@@ -281,6 +303,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @RangeAttack.started += instance.OnRangeAttack;
+            @RangeAttack.performed += instance.OnRangeAttack;
+            @RangeAttack.canceled += instance.OnRangeAttack;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -294,6 +319,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+
+            @RangeAttack.started -= instance.OnRangeAttack;
+            @RangeAttack.performed -= instance.OnRangeAttack;
+            @RangeAttack.canceled -= instance.OnRangeAttack;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -320,6 +349,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnRangeAttack(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnFollowMouse(InputAction.CallbackContext context);
     }
