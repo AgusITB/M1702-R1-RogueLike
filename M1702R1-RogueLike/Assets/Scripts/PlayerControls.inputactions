@@ -24,13 +24,22 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MousePosition",
-                    "type": "PassThrough",
-                    "id": "36ef4742-686d-48d2-9e8f-7c6fcf270afe",
-                    "expectedControlType": "Vector2",
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "c005bae3-a59b-49e8-8915-8c98d66343ab",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FollowMouse",
+                    "type": "Value",
+                    "id": "be350ce0-2403-45ac-b114-4cf428ddc385",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -152,17 +161,25 @@
                     "processors": "",
                     "groups": "",
                     "action": "RangeAttack",
+                },
+                {
+                    "id": "12a5870a-1fe9-48ca-96a8-0c9a679ebe7c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2f7baab3-aadd-4c49-bee4-f85ec47b3a1a",
-                    "path": "",
+                    "id": "1b03ca6a-777e-4fa6-8172-073b8be8e1fa",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MousePosition",
+                    "action": "FollowMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

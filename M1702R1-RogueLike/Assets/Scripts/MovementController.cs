@@ -1,16 +1,22 @@
 using System.Collections;
+using System.Net.WebSockets;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class MovementController : MonoBehaviour
 {
 
     private PlayerControls playerControls;
+ 
     public new Rigidbody2D rigidbody;
+    
+    
     private Animator playerController;
-
     [SerializeField]private GameObject bullet;
     [SerializeField]private Transform bulletDirection;
     private bool canShoot = true;
@@ -18,9 +24,22 @@ public class MovementController : MonoBehaviour
 
 
     private Vector2 direction = Vector2.zero;
+    public static MovementController player;
 
+    public WeaponParent weaponParent;
+
+    public Transform Aim;
+
+    private Vector2 direction = Vector2.zero;
     private Vector2 lastMoveDirection;
-    private readonly int  speed = 5;
+
+    private readonly int speed = 5;
+
+    private readonly float meleeCD = .5f;
+
+    private bool meleeIsAllowed = true;
+
+
 
    
 
@@ -43,39 +62,102 @@ public class MovementController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         playerController = GetComponent<Animator>();
+        weaponParent = GetComponentInChildren<WeaponParent>();
 
         playerControls = new PlayerControls();
 
         playerControls.Gameplay.Move.performed += ReadInput;
         playerControls.Gameplay.Move.canceled += ReadInput;
-
-       
+        playerControls.Gameplay.Move.performed += Move;
+        playerControls.Gameplay.Move.canceled += Move;
+        playerControls.Gameplay.Attack.performed += Attack;
+        playerControls.Gameplay.FollowMouse.performed += Face;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Move(InputAction.CallbackContext context)
     {
         MovePlayer();
         Animate();
         MousePosition();
+        StartCoroutine(MoveParameters(context));
     }
-    private void ReadInput(InputAction.CallbackContext context)
+    private IEnumerator MoveParameters(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();
 
-        if ((input.x == 0 && input.y == 0) && direction.x != 0 || direction.y != 0)
+        lastMoveDirection.x = direction.x;
+        lastMoveDirection.y = direction.y;
+
+        if (direction.magnitude < 0.05)
         {
- 
-            lastMoveDirection = direction.normalized;
+            rigidbody.velocity = Vector2.zero;
+            Aim.rotation = Quaternion.LookRotation(Vector3.back, direction * -1);
         }
+
+        yield return new WaitForSeconds(0.05f);
 
         direction.x = input.x;
         direction.y = input.y;
 
+        Animate();
+        MovePlayer();
+    }
+
+    private void Attack(InputAction.CallbackContext context)
+    {
+     
+        if (meleeIsAllowed)
+        {
+            meleeIsAllowed = true;
+            StartCoroutine(AttackAnimation());
+        }
+    
+    }
+    private IEnumerator AttackAnimation()
+    {
+        meleeIsAllowed = false;
+        weaponParent.Attack();
+
+        playerController.SetBool("MeleeAttack", true);
+
+        yield return new WaitForSeconds(meleeCD);
+
+        playerController.SetBool("MeleeAttack", false);
+        meleeIsAllowed = true;
+        Animate();
+    }
+
+
+    // Look at the direction of the mouse ON IDLE
+    private void Face(InputAction.CallbackContext context)
+    {
+        Vector3 worldMousePosition = GetMousePosition();
+
+        var vectorDir = worldMousePosition - rigidbody.transform.position;
+        vectorDir.Normalize();
+
+        lastMoveDirection.x = vectorDir.x;
+        lastMoveDirection.y = vectorDir.y;
+        if (direction.magnitude < 0.1) Aim.rotation = Quaternion.LookRotation(Vector3.back, vectorDir * -1);
+
+        Animate();
+    }
+
+
+    private Vector2 GetMousePosition()
+    {
+        Vector3 mousePos = playerControls.Gameplay.FollowMouse.ReadValue<Vector2>();
+        mousePos.z = Camera.main.nearClipPlane;
+        return Camera.main.ScreenToWorldPoint(mousePos);
     }
     private void MovePlayer()
     {
-        rigidbody.velocity = new Vector2(direction.x * speed, direction.y*speed);
+
+        if (direction.magnitude < 0.1) Aim.rotation = Quaternion.LookRotation(Vector3.back, lastMoveDirection * -1);
+        else Aim.rotation = Quaternion.LookRotation(Vector3.back, direction * -1);
+
+        rigidbody.velocity = new Vector2(direction.x * speed, direction.y * speed);
     }
     private void PlayerShoot()
     {
@@ -100,9 +182,23 @@ public class MovementController : MonoBehaviour
     {
         playerController.SetFloat("AnimMoveX", direction.x);
         playerController.SetFloat("AnimMoveY", direction.y);
+
         playerController.SetFloat("AnimMoveMagnitude", direction.magnitude);
+
         playerController.SetFloat("AnimLastMoveX", lastMoveDirection.x);
         playerController.SetFloat("AnimLastMoveY", lastMoveDirection.y);
+
+        playerController.SetFloat("AttackMoveX", direction.x);
+        playerController.SetFloat("AttackMoveY", direction.y);
+
+        // If the player is standing still set the attack move as parameter to the attack animation
+        if (direction.magnitude < 0.1)
+        {
+            playerController.SetFloat("AttackMoveX", lastMoveDirection.x);
+            playerController.SetFloat("AttackMoveY", lastMoveDirection.y);
+        }
+
+
     }
     private void MousePosition()
     {
