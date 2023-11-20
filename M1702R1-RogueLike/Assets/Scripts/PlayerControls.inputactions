@@ -163,6 +163,7 @@
                     "action": "RangeAttack",
                 },
                 {
+                    "name": "",
                     "id": "12a5870a-1fe9-48ca-96a8-0c9a679ebe7c",
                     "path": "<Keyboard>/space",
                     "interactions": "",

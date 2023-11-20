@@ -7,11 +7,13 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 public class Bullet : MonoBehaviour
 {
 
-    [SerializeField] private float speed = 4f;
+    [SerializeField] private float bulletSpeed = 4f;
+    private Rigidbody2D rb;
 
-    private void Start()
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
     IEnumerator DestroyBulletAfeterTime()
     {
@@ -20,10 +22,17 @@ public class Bullet : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate( transform.up * speed* Time.deltaTime,Space.World);
+       
+    }
+
+    public void DirectionBullet(Vector2 direction)
+    {
+
+        rb.velocity = direction * bulletSpeed;
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);   
+       //s Destroy(gameObject);   
     }
 }

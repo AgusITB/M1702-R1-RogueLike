@@ -17,20 +17,22 @@ public class MovementController : MonoBehaviour
     
     
     private Animator playerController;
-    [SerializeField]private GameObject bullet;
+    [SerializeField]private Bullet bullet;
+
     [SerializeField]private Transform bulletDirection;
+
     private bool canShoot = true;
     private Camera main;
 
 
     private Vector2 direction = Vector2.zero;
+
     public static MovementController player;
 
     public WeaponParent weaponParent;
 
     public Transform Aim;
 
-    private Vector2 direction = Vector2.zero;
     private Vector2 lastMoveDirection;
 
     private readonly int speed = 5;
@@ -66,8 +68,6 @@ public class MovementController : MonoBehaviour
 
         playerControls = new PlayerControls();
 
-        playerControls.Gameplay.Move.performed += ReadInput;
-        playerControls.Gameplay.Move.canceled += ReadInput;
         playerControls.Gameplay.Move.performed += Move;
         playerControls.Gameplay.Move.canceled += Move;
         playerControls.Gameplay.Attack.performed += Attack;
@@ -163,11 +163,14 @@ public class MovementController : MonoBehaviour
     {
         if (!canShoot) return;
  
-        Vector2 mousePosition = playerControls.Gameplay.MousePosition.ReadValue<Vector2>();
+        Vector2 mousePosition = playerControls.Gameplay.FollowMouse.ReadValue<Vector2>();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        GameObject g = Instantiate(bullet, bulletDirection.position, bulletDirection.rotation);
+        Bullet g = Instantiate(bullet, bulletDirection.position, bulletDirection.rotation);
+
         Debug.Log("Se ha activado la bala");
-        g.SetActive(true);
+
+        g.gameObject.SetActive(true);
+        g.DirectionBullet(mousePosition);
         StartCoroutine(CanShoot());
     
     }
@@ -203,7 +206,7 @@ public class MovementController : MonoBehaviour
     private void MousePosition()
     {
         //Rotation
-        Vector2 mouseScreenPosition = playerControls.Gameplay.MousePosition.ReadValue<Vector2>();
+        Vector2 mouseScreenPosition = playerControls.Gameplay.FollowMouse.ReadValue<Vector2>();
         Vector3 mouseWorldPosition = main.ScreenToWorldPoint(mouseScreenPosition);
         Vector3 targetDirection = mouseWorldPosition - transform.position;
         float angle= Mathf.Atan2(targetDirection.y, targetDirection.x);
