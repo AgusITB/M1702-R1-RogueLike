@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
@@ -7,9 +8,9 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 public class Bullet : MonoBehaviour
 {
 
-    [SerializeField] private float bulletSpeed = 4f;
+    private float bulletSpeed = 10f;
     private Rigidbody2D rb;
-
+    private int damage = 5;
 
     private void Awake()
     {
@@ -27,12 +28,19 @@ public class Bullet : MonoBehaviour
 
     public void DirectionBullet(Vector2 direction)
     {
-
+        direction.Normalize();
         rb.velocity = direction * bulletSpeed;
-        
+        float rotation = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-       //s Destroy(gameObject);   
+        if (other.TryGetComponent(out IDamagable obj))
+        {
+            Enemy enemy = (Enemy)obj;
+            enemy.AnimateHit();
+            enemy.TakeDamage(damage);
+            this.gameObject.SetActive(false);
+        }
     }
 }
