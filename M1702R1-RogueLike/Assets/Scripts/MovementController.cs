@@ -40,10 +40,10 @@ public class MovementController : MonoBehaviour
     private readonly float meleeCD = .5f;
 
     private bool meleeIsAllowed = true;
+    private bool rangedIsAllowed = true;
 
 
 
-   
 
     private void OnEnable()
     {
@@ -56,7 +56,7 @@ public class MovementController : MonoBehaviour
     private void Start()
     {
         main = Camera.main;
-        playerControls.Gameplay.RangeAttack.performed += _ => PlayerShoot();
+       
 
     }
 
@@ -67,7 +67,7 @@ public class MovementController : MonoBehaviour
         weaponParent = GetComponentInChildren<WeaponParent>();
 
         playerControls = new PlayerControls();
-
+        playerControls.Gameplay.RangeAttack.performed += PlayerShoot;
         playerControls.Gameplay.Move.performed += Move;
         playerControls.Gameplay.Move.canceled += Move;
         playerControls.Gameplay.Attack.performed += Attack;
@@ -128,6 +128,18 @@ public class MovementController : MonoBehaviour
         Animate();
     }
 
+    private IEnumerator RangedAttackAnimation()
+    {
+        rangedIsAllowed = false;
+        
+        playerController.SetBool("RangeAttack", true);
+
+        yield return new WaitForSeconds(0.583f);
+
+        playerController.SetBool("RangeAttack", false);
+        rangedIsAllowed = true;
+    }
+
 
     // Look at the direction of the mouse ON IDLE
     private void Face(InputAction.CallbackContext context)
@@ -159,15 +171,18 @@ public class MovementController : MonoBehaviour
 
         rigidbody.velocity = new Vector2(direction.x * speed, direction.y * speed);
     }
-    private void PlayerShoot()
+    private void PlayerShoot(InputAction.CallbackContext context)
     {
         if (!canShoot) return;
- 
+
+        
         Vector2 mousePosition = playerControls.Gameplay.FollowMouse.ReadValue<Vector2>();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Bullet g = Instantiate(bullet, bulletDirection.position, bulletDirection.rotation);
 
         Debug.Log("Se ha activado la bala");
+
+        StartCoroutine(RangedAttackAnimation());
 
         g.gameObject.SetActive(true);
         g.DirectionBullet(mousePosition);
@@ -177,7 +192,7 @@ public class MovementController : MonoBehaviour
     IEnumerator CanShoot()
     {
         canShoot = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         canShoot = true;
     }
 
