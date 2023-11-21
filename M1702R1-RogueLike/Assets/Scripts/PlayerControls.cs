@@ -176,7 +176,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": "" "",
+                    ""name"": """",
                     ""id"": ""5175cefe-c504-4cfa-aa7f-3fba367cf589"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -186,8 +186,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
-                {   
-                     ""name"": "" "",
+                {
+                    ""name"": """",
                     ""id"": ""12a5870a-1fe9-48ca-96a8-0c9a679ebe7c"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -198,6 +198,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
                     ""id"": ""1b03ca6a-777e-4fa6-8172-073b8be8e1fa"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
@@ -319,7 +320,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-
             @RangeAttack.started -= instance.OnRangeAttack;
             @RangeAttack.performed -= instance.OnRangeAttack;
             @RangeAttack.canceled -= instance.OnRangeAttack;

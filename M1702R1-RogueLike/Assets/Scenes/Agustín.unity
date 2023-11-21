@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 388307422}
-  bullet: {fileID: 6428537874856406212, guid: 939295420ed2cb54ca338712548c272d, type: 3}
+  bullet: {fileID: 2817408598862204337, guid: 939295420ed2cb54ca338712548c272d, type: 3}
   bulletDirection: {fileID: 1363087978}
   weaponParent: {fileID: 369538545}
   Aim: {fileID: 1810229660}

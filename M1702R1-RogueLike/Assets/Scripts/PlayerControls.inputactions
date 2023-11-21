@@ -161,6 +161,8 @@
                     "processors": "",
                     "groups": "",
                     "action": "RangeAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
