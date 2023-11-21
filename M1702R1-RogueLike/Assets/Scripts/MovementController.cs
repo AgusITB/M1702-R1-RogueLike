@@ -163,14 +163,13 @@ public class MovementController : MonoBehaviour
     {
         if (!canShoot) return;
  
-        Vector2 mousePosition = playerControls.Gameplay.FollowMouse.ReadValue<Vector2>();
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 mousePosition=GetMousePosition();
         Bullet g = Instantiate(bullet, bulletDirection.position, bulletDirection.rotation);
 
         Debug.Log("Se ha activado la bala");
 
         g.gameObject.SetActive(true);
-        g.DirectionBullet(mousePosition);
+        g.DirectionBullet(mousePosition-transform.position);
         StartCoroutine(CanShoot());
     
     }

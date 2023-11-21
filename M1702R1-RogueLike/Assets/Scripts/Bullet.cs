@@ -7,6 +7,7 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class Bullet : MonoBehaviour
 {
+    private Animator animatorController;
 
     private float bulletSpeed = 10f;
     private Rigidbody2D rb;
@@ -15,17 +16,13 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animatorController = GetComponent<Animator>();
     }
     IEnumerator DestroyBulletAfeterTime()
     {
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
-    private void Update()
-    {
-       
-    }
-
     public void DirectionBullet(Vector2 direction)
     {
         direction.Normalize();
@@ -40,7 +37,17 @@ public class Bullet : MonoBehaviour
             Enemy enemy = (Enemy)obj;
             enemy.AnimateHit();
             enemy.TakeDamage(damage);
-            this.gameObject.SetActive(false);
+            AnimateExplotion();
+        } else if (other.CompareTag("Wall"))
+        {
+            AnimateExplotion();
+
         }
+    }
+    private void AnimateExplotion()
+    {
+        this.animatorController.SetBool("Exploded", true);
+        rb.velocity = Vector3.zero;
+        StartCoroutine(DestroyBulletAfeterTime());
     }
 }
