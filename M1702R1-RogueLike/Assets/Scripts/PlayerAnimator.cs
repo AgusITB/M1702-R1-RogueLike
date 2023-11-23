@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
+        controller = GetComponent<MovementController>();
         animController = GetComponent<Animator>();
     }
     private void AnimateMovement()
@@ -30,7 +32,6 @@ public class PlayerAnimator : MonoBehaviour
     }
     private void AnimateMelee()
     {
-        // If the player is standing still set the attack move as parameter to the attack animation
         if (controller.direction.magnitude < 0.1)
         {
             animController.SetFloat("AttackMoveX", controller.lastMoveDirection.x);
@@ -43,5 +44,13 @@ public class PlayerAnimator : MonoBehaviour
     }
 
 
+    private IEnumerator AttackCoolDownHandler(string attackType , float cooldown)
+    {
+        animController.SetBool(attackType, true);
+
+        yield return new WaitForSeconds(cooldown);
+
+        animController.SetBool(attackType, false);
+    }
 
 }
