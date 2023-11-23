@@ -11,29 +11,34 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 public class MovementController : MonoBehaviour
 {
 
-    private PlayerControls playerControls;
- 
-    public new Rigidbody2D rigidbody;
-    
-    
-    private Animator playerController;
-    [SerializeField]private Bullet bullet;
+    public static MovementController Instance;
 
+    public Animator animController;
+
+
+    //Private Components
+    private PlayerControls playerControls;
+    private Rigidbody2D rb;  
+    
+    private Camera main;
+
+    //Private GameObjects
+    public WeaponParent weaponParent;
+    public static MovementController player;
+
+    //Private Variables
+    public Vector2 direction = Vector2.zero;
+    public Vector2 lastMoveDirection;
+
+    [SerializeField]private Bullet bullet;
     [SerializeField]private Transform bulletDirection;
 
     private bool canShoot = true;
-    private Camera main;
-
-
-    private Vector2 direction = Vector2.zero;
-
-    public static MovementController player;
-
-    public WeaponParent weaponParent;
+    
 
     public Transform Aim;
 
-    private Vector2 lastMoveDirection;
+    
 
     private readonly int speed = 5;
 
@@ -56,20 +61,22 @@ public class MovementController : MonoBehaviour
     private void Start()
     {
         main = Camera.main;
-       
-
     }
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        playerController = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        animController = GetComponent<Animator>();
         weaponParent = GetComponentInChildren<WeaponParent>();
 
         playerControls = new PlayerControls();
-        playerControls.Gameplay.RangeAttack.performed += PlayerShoot;
+
         playerControls.Gameplay.Move.performed += Move;
         playerControls.Gameplay.Move.canceled += Move;
+
+
+        playerControls.Gameplay.RangeAttack.performed += PlayerShoot;
+
         playerControls.Gameplay.Attack.performed += Attack;
         playerControls.Gameplay.FollowMouse.performed += Face;
     }
@@ -91,7 +98,7 @@ public class MovementController : MonoBehaviour
 
         if (direction.magnitude < 0.05)
         {
-            rigidbody.velocity = Vector2.zero;
+            rb.velocity = Vector2.zero;
             Aim.rotation = Quaternion.LookRotation(Vector3.back, direction * -1);
         }
 
@@ -119,11 +126,11 @@ public class MovementController : MonoBehaviour
         meleeIsAllowed = false;
         weaponParent.Attack();
 
-        playerController.SetBool("MeleeAttack", true);
+        animController.SetBool("MeleeAttack", true);
 
         yield return new WaitForSeconds(meleeCD);
 
-        playerController.SetBool("MeleeAttack", false);
+        animController.SetBool("MeleeAttack", false);
         meleeIsAllowed = true;
         Animate();
     }
@@ -132,11 +139,11 @@ public class MovementController : MonoBehaviour
     {
         rangedIsAllowed = false;
         
-        playerController.SetBool("RangeAttack", true);
+        animController.SetBool("RangeAttack", true);
 
         yield return new WaitForSeconds(0.583f);
 
-        playerController.SetBool("RangeAttack", false);
+        animController.SetBool("RangeAttack", false);
         rangedIsAllowed = true;
     }
 
@@ -146,7 +153,7 @@ public class MovementController : MonoBehaviour
     {
         Vector3 worldMousePosition = GetMousePosition();
 
-        var vectorDir = worldMousePosition - rigidbody.transform.position;
+        var vectorDir = worldMousePosition - rb.transform.position;
         vectorDir.Normalize();
 
         lastMoveDirection.x = vectorDir.x;
@@ -169,7 +176,7 @@ public class MovementController : MonoBehaviour
         if (direction.magnitude < 0.1) Aim.rotation = Quaternion.LookRotation(Vector3.back, lastMoveDirection * -1);
         else Aim.rotation = Quaternion.LookRotation(Vector3.back, direction * -1);
 
-        rigidbody.velocity = new Vector2(direction.x * speed, direction.y * speed);
+        rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
     }
     private void PlayerShoot(InputAction.CallbackContext context)
     {
@@ -198,22 +205,22 @@ public class MovementController : MonoBehaviour
 
     private void Animate()
     {
-        playerController.SetFloat("AnimMoveX", direction.x);
-        playerController.SetFloat("AnimMoveY", direction.y);
+        animController.SetFloat("AnimMoveX", direction.x);
+        animController.SetFloat("AnimMoveY", direction.y);
 
-        playerController.SetFloat("AnimMoveMagnitude", direction.magnitude);
+        animController.SetFloat("AnimMoveMagnitude", direction.magnitude);
 
-        playerController.SetFloat("AnimLastMoveX", lastMoveDirection.x);
-        playerController.SetFloat("AnimLastMoveY", lastMoveDirection.y);
+        animController.SetFloat("AnimLastMoveX", lastMoveDirection.x);
+        animController.SetFloat("AnimLastMoveY", lastMoveDirection.y);
 
-        playerController.SetFloat("AttackMoveX", direction.x);
-        playerController.SetFloat("AttackMoveY", direction.y);
+        animController.SetFloat("AttackMoveX", direction.x);
+        animController.SetFloat("AttackMoveY", direction.y);
 
         // If the player is standing still set the attack move as parameter to the attack animation
         if (direction.magnitude < 0.1)
         {
-            playerController.SetFloat("AttackMoveX", lastMoveDirection.x);
-            playerController.SetFloat("AttackMoveY", lastMoveDirection.y);
+            animController.SetFloat("AttackMoveX", lastMoveDirection.x);
+            animController.SetFloat("AttackMoveY", lastMoveDirection.y);
         }
 
 
