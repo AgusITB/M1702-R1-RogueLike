@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    IEnumerator DestroyBulletAfeterTime()
+    IEnumerator DestroyBulletAfterTime()
     {
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);

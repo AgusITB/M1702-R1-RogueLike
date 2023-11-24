@@ -32,6 +32,7 @@ public class Weapon : MonoBehaviour
         meleeSlash.SetActive(false);
 
     }
+    
 
 
 }

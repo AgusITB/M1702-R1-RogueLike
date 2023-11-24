@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1150682901212517111}
   - component: {fileID: 1640878027048817398}
   - component: {fileID: 9127249180081979661}
-  - component: {fileID: 2817408598862204337}
   - component: {fileID: -417989023656284092}
+  - component: {fileID: 6940445176460040100}
   m_Layer: 0
   m_Name: EnergyBall_0
   m_TagString: Untagged
@@ -154,18 +154,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3039774, y: 0.56483704}
   m_EdgeRadius: 0
---- !u!114 &2817408598862204337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428537874856406212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70205adb8a1584479a653084e8df32b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &-417989023656284092
 Rigidbody2D:
   serializedVersion: 4
@@ -193,3 +181,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6940445176460040100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428537874856406212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edba14fac0dd2664b9d8308513b1f545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
