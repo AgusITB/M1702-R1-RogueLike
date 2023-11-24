@@ -23,7 +23,7 @@ public class MovementController : MonoBehaviour
     private Camera main;
 
     //Private GameObjects
-    public WeaponParent weaponParent;
+    public Weapon weaponParent;
     public static MovementController player;
 
     //Private Variables
@@ -67,12 +67,12 @@ public class MovementController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animController = GetComponent<Animator>();
-        weaponParent = GetComponentInChildren<WeaponParent>();
+        weaponParent = GetComponentInChildren<Weapon>();
 
         playerControls = new PlayerControls();
 
-        playerControls.Gameplay.Move.performed += Move;
-        playerControls.Gameplay.Move.canceled += Move;
+        //playerControls.Gameplay.Move.performed += Move;
+        //playerControls.Gameplay.Move.canceled += Move;
 
 
         playerControls.Gameplay.RangeAttack.performed += PlayerShoot;
@@ -82,34 +82,37 @@ public class MovementController : MonoBehaviour
     }
 
 
-    private void Move(InputAction.CallbackContext context)
-    {
-        MovePlayer();
-        Animate();
-        MousePosition();
-        StartCoroutine(MoveParameters(context));
-    }
-    private IEnumerator MoveParameters(InputAction.CallbackContext context)
-    {
-        var input = context.ReadValue<Vector2>();
+    //private void Move(InputAction.CallbackContext context)
+    //{
+    //    MovePlayer();
+    //    Animate();
+    //    MousePosition();
+    //   // StartCoroutine(MoveParameters(context));
+    //}
+    //private IEnumerator MoveParameters(InputAction.CallbackContext context)
+    //{
+        //var input = context.ReadValue<Vector2>();
 
-        lastMoveDirection.x = direction.x;
-        lastMoveDirection.y = direction.y;
+        //lastMoveDirection.x = direction.x;
+        //lastMoveDirection.y = direction.y;
 
-        if (direction.magnitude < 0.05)
-        {
-            rb.velocity = Vector2.zero;
-            Aim.rotation = Quaternion.LookRotation(Vector3.back, direction * -1);
-        }
+        //if (direction.magnitude < 0.05)
+        //{
+        //    rb.velocity = Vector2.zero;
+            
+    
+    
+        //Aim.rotation = Quaternion.LookRotation(Vector3.back, direction * -1);
+        //}
 
-        yield return new WaitForSeconds(0.05f);
+        //yield return new WaitForSeconds(0.05f);
 
-        direction.x = input.x;
-        direction.y = input.y;
+        //direction.x = input.x;
+        //direction.y = input.y;
 
-        Animate();
-        MovePlayer();
-    }
+        //Animate();
+        //MovePlayer();
+    //}
 
     private void Attack(InputAction.CallbackContext context)
     {
@@ -124,7 +127,6 @@ public class MovementController : MonoBehaviour
     private IEnumerator AttackAnimation()
     {
         meleeIsAllowed = false;
-        weaponParent.Attack();
 
         animController.SetBool("MeleeAttack", true);
 
@@ -154,6 +156,7 @@ public class MovementController : MonoBehaviour
         Vector3 worldMousePosition = GetMousePosition();
 
         var vectorDir = worldMousePosition - rb.transform.position;
+
         vectorDir.Normalize();
 
         lastMoveDirection.x = vectorDir.x;
@@ -176,7 +179,7 @@ public class MovementController : MonoBehaviour
         if (direction.magnitude < 0.1) Aim.rotation = Quaternion.LookRotation(Vector3.back, lastMoveDirection * -1);
         else Aim.rotation = Quaternion.LookRotation(Vector3.back, direction * -1);
 
-        rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
+     //   rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
     }
     private void PlayerShoot(InputAction.CallbackContext context)
     {
