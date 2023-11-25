@@ -15,7 +15,7 @@ public class PlayerInputs : MonoBehaviour
     PlayerAnimation pAnimation;
     RangeAttack rangeAttack;
 
-    public Weapon weapon;
+    public MeleeAttack weapon;
 
     private Vector2 direction;
     private Vector2 lastMoveDirection;
@@ -49,14 +49,34 @@ public class PlayerInputs : MonoBehaviour
 
 
     public void StartAttack(InputAction.CallbackContext context)
-    { 
-        string attackType = (context.action == playerControls.Gameplay.RangeAttack) ? "RangeAttack" : "MeleeAttack";   
-        
-        pAnimation.GetAttackDirection(direction, lastMoveDirection);
-        StartCoroutine(pAnimation.Attack(attackType));
-        if (attackType == "MeleeAttack") StartCoroutine(weapon.Attack());
-        else rangeAttack.Attack();
+    {
+        string attackType;
+      
+        if (context.action == playerControls.Gameplay.RangeAttack)
+        {
+            attackType = "RangeAttack";
+
+
+            StartCoroutine(pAnimation.Attack(attackType));
+
+
+            rangeAttack.Cast();
+        } else if (context.action == playerControls.Gameplay.Attack)
+        {
+            attackType = "MeleeAttack";
+
+
+            pAnimation.GetAttackDirection(direction, lastMoveDirection);
+
+
+            StartCoroutine(pAnimation.Attack(attackType));
+
+
+            weapon.Cast();
+        }
     }
+
+
 
     public void ReadMovement(InputAction.CallbackContext context)
     {

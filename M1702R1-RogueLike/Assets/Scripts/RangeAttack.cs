@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RangeAttack : MonoBehaviour
+public class RangeAttack : Ability
 {
     public Bullet bullet;
 
     public Transform bulletDirection;
-    public void Attack()
+
+
+    public override void Cast()
     {
         var mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //mouseDirection.Normalize();
@@ -23,6 +25,9 @@ public class RangeAttack : MonoBehaviour
 
         g.gameObject.SetActive(true);
         g.DirectionBullet(mouseDirection);
+       
+        
+  
     }
 
 

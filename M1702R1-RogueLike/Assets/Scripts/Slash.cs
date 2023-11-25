@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 
 public class Slash : MonoBehaviour
 {
@@ -16,4 +16,12 @@ public class Slash : MonoBehaviour
             enemy.TakeDamage(damage);
         }
     }
+
+    public void EndAnimation()
+    {
+
+        this.gameObject.SetActive(false);
+
+    }
+
 }

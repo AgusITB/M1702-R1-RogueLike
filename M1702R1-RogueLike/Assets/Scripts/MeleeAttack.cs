@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class Weapon : MonoBehaviour
+public class MeleeAttack : Ability
 {
     public GameObject meleePrefab;
     GameObject meleeSlash;
@@ -17,19 +17,16 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         Vector3 position = new (transform.position.x, transform.position.y);
-
-
         meleeSlash = Instantiate(meleePrefab, position, Quaternion.identity);
-
         meleeSlash.transform.SetParent(this.transform, true);
         meleeSlash.SetActive(false);
     }
 
-    public IEnumerator Attack()
+    public override void Cast()
     {
         meleeSlash.SetActive(true);
-        yield return new WaitForSeconds(0.583f);
-        meleeSlash.SetActive(false);
+       // yield return new WaitForSeconds(0.583f);
+       // meleeSlash.SetActive(false);
 
     }
     

@@ -243,6 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e9621428ab32a498bed794dd5a51a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: New Ability Name
+  abilityDescription: New Ability Description
+  abilityCooldown: 1
   meleePrefab: {fileID: 7242864776253355039, guid: 1c4b40b3dbad65349aed24a9d7fe170f, type: 3}
 --- !u!61 &369538546
 BoxCollider2D:
@@ -541,6 +544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578229f7771248b40a5849fdaa477213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityName: New Ability Name
+  abilityDescription: New Ability Description
+  abilityCooldown: 1
   bullet: {fileID: 6940445176460040100, guid: 939295420ed2cb54ca338712548c272d, type: 3}
   bulletDirection: {fileID: 1633305681}
 --- !u!1 &637859039
