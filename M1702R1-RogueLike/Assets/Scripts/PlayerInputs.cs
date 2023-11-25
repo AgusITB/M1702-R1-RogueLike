@@ -62,9 +62,6 @@ public class PlayerInputs : MonoBehaviour
           
         }
     }
-
-
-
     public void ReadMovement(InputAction.CallbackContext context)
     {
         var input = context.ReadValue<Vector2>();

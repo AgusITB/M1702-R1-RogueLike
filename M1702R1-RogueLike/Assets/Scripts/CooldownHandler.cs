@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CooldownHandler : MonoBehaviour
@@ -13,7 +14,6 @@ public class CooldownHandler : MonoBehaviour
     {
         public Ability ability;
         public float cooldown;
-
         public CooldownData(Ability ability, float cooldown)
         {
             this.ability = ability;
@@ -21,8 +21,6 @@ public class CooldownHandler : MonoBehaviour
         }
 
     }
-
-
     private void Awake()
     {
         if (Instance == null)
@@ -33,25 +31,23 @@ public class CooldownHandler : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Update()
-    {
-        for (int i = 0; i <abilitiesOnCooldown.Count; i++)
-        {
-            abilitiesOnCooldown[i].cooldown -= Time.deltaTime;
-        }
-
-        for (int i = abilitiesOnCooldown.Count - 1; i >= 0; i--)
-        {
-            if (abilitiesOnCooldown[i].cooldown <= 0)
-            {
-                abilitiesOnCooldown.RemoveAt(i);
-            }
-        }
-    }
     public void PutOnCooldown(Ability ability)
     {
-        abilitiesOnCooldown.Add(new CooldownData(ability, ability.AbilityCooldown));
+        CooldownData abilitycd = new CooldownData(ability, ability.AbilityCooldown);
+
+        abilitiesOnCooldown.Add(abilitycd);
+        StartCoroutine(Cooldown(abilitycd));
+    }
+
+    IEnumerator Cooldown(CooldownData ability)
+    {
+        while (ability.cooldown > 0f)
+        {
+            ability.cooldown -= Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(ability.cooldown);
+        abilitiesOnCooldown.Remove(ability);
     }
 
     public bool IsOnCooldown(Ability ability)

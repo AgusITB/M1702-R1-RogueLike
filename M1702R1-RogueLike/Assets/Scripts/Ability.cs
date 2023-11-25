@@ -46,7 +46,6 @@ public abstract class Ability : MonoBehaviour
         if(CooldownHandler.Instance.IsOnCooldown(this)) { return; }
         Debug.Log($"I am casting: {abilityName}");
         Cast();
-    
         CooldownHandler.Instance.PutOnCooldown(this);
     }
 
