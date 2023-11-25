@@ -4,27 +4,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
 
-public class Bullet : MonoBehaviour
+public class EnergyBall : MonoBehaviour
 {
 
     private float bulletSpeed = 10f;
     private Rigidbody2D rb;
-    private int damage = 5;
+    public int damage = 5;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    IEnumerator DestroyBulletAfterTime()
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
-    }
-    private void Update()
-    {
-       
-    }
-
     public void DirectionBullet(Vector2 direction)
     {
         direction.Normalize();
@@ -38,8 +28,9 @@ public class Bullet : MonoBehaviour
         {
             if (obj.GetType() == typeof(Player)) return;
             obj.AnimateHit();
-            obj.TakeDamage(damage);
+            obj.TakeDamage(damage);           
         }
         this.gameObject.SetActive(false);
     }
+
 }

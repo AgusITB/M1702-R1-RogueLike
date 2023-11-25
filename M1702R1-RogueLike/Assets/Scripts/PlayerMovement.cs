@@ -11,8 +11,12 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerAnimation pAnimation;
     public Transform meleeAim;
+    public Transform rangeAim;
 
-    Vector3 vector3; 
+
+    Vector3 meleeDirection;
+    Vector3 rangeDirection;
+
 
     private int speed = 5;
 
@@ -27,16 +31,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (direction.magnitude > 0.1)
         {
-            vector3 = Vector3.left * direction.x + Vector3.down * direction.y; 
+            meleeDirection = Vector3.left * direction.x + Vector3.down * direction.y; 
         }
 
         if (direction.magnitude < 0.05)
         {
             rb.velocity = Vector2.zero;
-            vector3 = Vector3.left * lastDirection.x + Vector3.down * lastDirection.y;
+            meleeDirection = Vector3.left * lastDirection.x + Vector3.down * lastDirection.y;
         }
+        rangeDirection = Vector3.left * lastDirection.x + Vector3.down * lastDirection.y;
 
-        meleeAim.rotation = Quaternion.LookRotation(Vector3.forward, vector3);
+        rangeAim.rotation = Quaternion.LookRotation(Vector3.forward, rangeDirection);
+        meleeAim.rotation = Quaternion.LookRotation(Vector3.forward, meleeDirection);
 
         rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
 

@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 public class RangeAttack : Ability
 {
-    public Bullet bullet;
+    public EnergyBall bulletPrefab;
 
     public Transform bulletDirection;
 
@@ -17,25 +17,14 @@ public class RangeAttack : Ability
     public override void Cast()
     {
         var mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //mouseDirection.Normalize();
 
-        Bullet g = Instantiate(bullet, bulletDirection.transform.position, bulletDirection.rotation);
+        EnergyBall g = Instantiate(bulletPrefab, bulletDirection.transform.position, bulletDirection.rotation);
 
         Debug.Log("Se ha activado la bala");
 
         g.gameObject.SetActive(true);
-        g.DirectionBullet(mouseDirection);
-       
-        
+        g.DirectionBullet(mouseDirection-transform.position);
   
     }
-
-
-    //IEnumerator CanShoot()
-    //{
-    //    canShoot = false;
-    //    yield return new WaitForSeconds(2f);
-    //    canShoot = true;
-    //}
 
 }

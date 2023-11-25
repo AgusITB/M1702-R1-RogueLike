@@ -12,22 +12,24 @@ using UnityEngine.UIElements;
 public class MeleeAttack : Ability
 {
     public GameObject meleePrefab;
-    GameObject meleeSlash;
 
-    private void Awake()
-    {
-        Vector3 position = new (transform.position.x, transform.position.y);
-        meleeSlash = Instantiate(meleePrefab, position, Quaternion.identity);
-        meleeSlash.transform.SetParent(this.transform, true);
-        meleeSlash.SetActive(false);
+    GameObject instantiatedPrefab;
+
+    public Transform rangePosition;
+    public Transform meleeParent;
+
+    protected override void Awake()
+    {   
+        base.Awake();   
+        
+        Vector3 position = new (rangePosition.position.x, rangePosition.position.y );
+        instantiatedPrefab = Instantiate(meleePrefab, position, Quaternion.AngleAxis(-80, meleeParent.position));
+        instantiatedPrefab.transform.SetParent(meleeParent, true);
+        instantiatedPrefab.SetActive(false);
     }
-
     public override void Cast()
     {
-        meleeSlash.SetActive(true);
-       // yield return new WaitForSeconds(0.583f);
-       // meleeSlash.SetActive(false);
-
+        instantiatedPrefab.SetActive(true);
     }
     
 
