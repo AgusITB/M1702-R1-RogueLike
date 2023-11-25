@@ -36,9 +36,10 @@ public class Bullet : MonoBehaviour
     {
         if (other.TryGetComponent(out IDamagable obj))
         {
+            if (obj.GetType() == typeof(Player)) return;
             obj.AnimateHit();
             obj.TakeDamage(damage);
-            this.gameObject.SetActive(false);
         }
+        this.gameObject.SetActive(false);
     }
 }

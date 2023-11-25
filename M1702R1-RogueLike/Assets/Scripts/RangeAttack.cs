@@ -12,20 +12,17 @@ public class RangeAttack : MonoBehaviour
     public Bullet bullet;
 
     public Transform bulletDirection;
-
-    public void Attack(Vector3 mousePosition)
+    public void Attack()
     {
-        var mouseDirection = mousePosition - transform.position;
-        mouseDirection.Normalize();
+        var mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //mouseDirection.Normalize();
 
-        Bullet g = Instantiate(bullet, mouseDirection, bulletDirection.rotation);
+        Bullet g = Instantiate(bullet, bulletDirection.transform.position, bulletDirection.rotation);
 
         Debug.Log("Se ha activado la bala");
 
         g.gameObject.SetActive(true);
-        g.DirectionBullet(mousePosition);
- 
-
+        g.DirectionBullet(mouseDirection);
     }
 
 

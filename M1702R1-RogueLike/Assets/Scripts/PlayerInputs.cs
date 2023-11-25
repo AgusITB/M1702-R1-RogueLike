@@ -55,7 +55,7 @@ public class PlayerInputs : MonoBehaviour
         pAnimation.GetAttackDirection(direction, lastMoveDirection);
         StartCoroutine(pAnimation.Attack(attackType));
         if (attackType == "MeleeAttack") StartCoroutine(weapon.Attack());
-        else rangeAttack.Attack(GetMousePosition(context));
+        else rangeAttack.Attack();
     }
 
     public void ReadMovement(InputAction.CallbackContext context)
