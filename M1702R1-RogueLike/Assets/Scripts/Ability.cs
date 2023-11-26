@@ -11,7 +11,7 @@ public abstract class Ability : MonoBehaviour
 
     [SerializeField] private float abilityCooldown = 1f;
 
-
+    public CooldownSlider slider;
 
     private PlayerControls playerControls;
 
@@ -21,6 +21,10 @@ public abstract class Ability : MonoBehaviour
     public string AbilityDescription { get { return abilityDescription; } }
 
     public string AbilityName { get { return abilityName; } }
+
+
+
+
 
     private void OnEnable()
     {

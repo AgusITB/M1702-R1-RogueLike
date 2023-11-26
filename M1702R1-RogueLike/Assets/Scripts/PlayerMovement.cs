@@ -30,9 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public void Move(Vector2 direction, Vector2 lastDirection)
     {
         if (direction.magnitude > 0.1)
-        {
-            meleeDirection = Vector3.left * direction.x + Vector3.down * direction.y; 
-        }
+            meleeDirection = Vector3.left * direction.x + Vector3.down * direction.y;
 
         if (direction.magnitude < 0.05)
         {

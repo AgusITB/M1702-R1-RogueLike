@@ -13,15 +13,21 @@ public class RangeAttack : Ability
 
     public Transform bulletDirection;
 
+    private PlayerAnimation pAnimation;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        pAnimation = GetComponent<PlayerAnimation>();
+    }
+
 
     public override void Cast()
     {
-        var mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        StartCoroutine(pAnimation.Attack(this.AbilityName));
         EnergyBall g = Instantiate(bulletPrefab, bulletDirection.transform.position, bulletDirection.rotation);
 
-        Debug.Log("Se ha activado la bala");
-
+        var mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         g.gameObject.SetActive(true);
         g.DirectionBullet(mouseDirection-transform.position);
   

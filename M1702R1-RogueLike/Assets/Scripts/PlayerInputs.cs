@@ -9,17 +9,14 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 public class PlayerInputs : MonoBehaviour
 {
 
+    public static PlayerInputs Instance;
+
     private PlayerControls playerControls;
 
     PlayerMovement pMovement;
-    PlayerAnimation pAnimation;
-    RangeAttack rangeAttack;
 
-   
-
-    private Vector2 direction;
-    private Vector2 lastMoveDirection;
-
+    public Vector2 direction;
+    public Vector2 lastMoveDirection;
 
     private void OnEnable()
     {
@@ -31,36 +28,22 @@ public class PlayerInputs : MonoBehaviour
     }
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
 
         pMovement = GetComponent<PlayerMovement>();
-        pAnimation = GetComponent<PlayerAnimation>();
-        rangeAttack = GetComponent<RangeAttack>();
 
         playerControls = new PlayerControls();
 
         playerControls.Gameplay.Move.performed += ReadMovement;
         playerControls.Gameplay.Move.canceled += ReadMovement;
-
-        //playerControls.Gameplay.RangeAttack.performed += StartAttack;
-        //playerControls.Gameplay.Attack.performed += StartAttack;
-
         playerControls.Gameplay.FollowMouse.performed += ReadMousePosition;
-    }
-
-
-    public void StartAttack(InputAction.CallbackContext context)
-    {
-        if (context.action == playerControls.Gameplay.RangeAttack)
-        {
-            StartCoroutine(pAnimation.Attack("RangeAttack"));
-            rangeAttack.Cast();
-
-        } else if (context.action == playerControls.Gameplay.Attack)
-        {
-            StartCoroutine(pAnimation.Attack("MeleeAttack"));
-            pAnimation.GetAttackDirection(direction, lastMoveDirection);
-          
-        }
     }
     public void ReadMovement(InputAction.CallbackContext context)
     {
@@ -77,7 +60,6 @@ public class PlayerInputs : MonoBehaviour
         lastMoveDirection.x = mouseDirection.x;
         lastMoveDirection.y = mouseDirection.y;
 
-        pAnimation.AnimateMovement(direction, lastMoveDirection);
         pMovement.Move(direction, lastMoveDirection);
 
     }
