@@ -41,9 +41,8 @@ public class MovementController : MonoBehaviour
 
     private bool meleeIsAllowed = true;
 
+    
 
-
-   
 
     private void OnEnable()
     {
@@ -57,6 +56,7 @@ public class MovementController : MonoBehaviour
     {
         main = Camera.main;
         playerControls.Gameplay.RangeAttack.performed += _ => PlayerShoot();
+       
 
     }
 
@@ -162,16 +162,25 @@ public class MovementController : MonoBehaviour
     private void PlayerShoot()
     {
         if (!canShoot) return;
- 
-        Vector3 mousePosition=GetMousePosition();
-        Bullet g = Instantiate(bullet, bulletDirection.position, bulletDirection.rotation);
 
-        Debug.Log("Se ha activado la bala");
+        Vector3 mousePosition = GetMousePosition();
 
-        g.gameObject.SetActive(true);
-        g.DirectionBullet(mousePosition-transform.position);
-        StartCoroutine(CanShoot());
-    
+        // Obtiene y activar una bala
+        Bullet bullet = BulletPool.Instance.GetBullet();
+        bullet.transform.position = Aim.transform.position;
+        bullet.transform.rotation = Aim.rotation;
+
+        if (bullet != null)
+        {
+            bullet.gameObject.SetActive(true);
+            bullet.DirectionBullet(mousePosition - transform.position);
+            StartCoroutine(CanShoot());
+        }
+        else
+        {
+            Debug.Log("El objeto de la pool no tiene el componente Bullet.");
+        }
+
     }
     IEnumerator CanShoot()
     {

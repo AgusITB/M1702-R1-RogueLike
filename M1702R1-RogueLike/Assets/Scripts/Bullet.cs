@@ -8,6 +8,11 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 public class Bullet : MonoBehaviour
 {
     private Animator animatorController;
+   
+
+    private GameObject bulletprefab;
+    private int bulletSize = 5;
+    private List<GameObject> bullets;
 
     private float bulletSpeed = 10f;
     private Rigidbody2D rb;
@@ -18,10 +23,11 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animatorController = GetComponent<Animator>();
     }
+    
     IEnumerator DestroyBulletAfeterTime()
     {
         yield return new WaitForSeconds(1f);
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     public void DirectionBullet(Vector2 direction)
     {
@@ -29,6 +35,10 @@ public class Bullet : MonoBehaviour
         rb.velocity = direction * bulletSpeed;
         float rotation = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotation);
+    }
+    private void OnBecameVisible()
+    {
+        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
