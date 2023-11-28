@@ -6,6 +6,7 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class EnergyBall : MonoBehaviour
 {
+    private Animator animatorController;
 
     private float bulletSpeed = 10f;
     private Rigidbody2D rb;
@@ -14,6 +15,12 @@ public class EnergyBall : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animatorController = GetComponent<Animator>();
+    }
+    IEnumerator DestroyBulletAfeterTime()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
     }
     public void DirectionBullet(Vector2 direction)
     {
@@ -28,9 +35,23 @@ public class EnergyBall : MonoBehaviour
         {
             if (obj.GetType() == typeof(Player)) return;
             obj.AnimateHit();
-            obj.TakeDamage(damage);           
+            obj.TakeDamage(damage);
+            AnimateExplotion();
         }
-        this.gameObject.SetActive(false);
+        else if (other.CompareTag("Wall"))
+        {
+            AnimateExplotion();
+        }
     }
+
+    private void AnimateExplotion()
+    {
+        this.animatorController.SetBool("Exploded", true);
+        rb.velocity = Vector3.zero;
+        StartCoroutine(DestroyBulletAfeterTime());
+    }
+
+
+
 
 }
