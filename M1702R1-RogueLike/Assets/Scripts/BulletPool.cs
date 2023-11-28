@@ -5,9 +5,9 @@ using UnityEngine;
 public class BulletPool : MonoBehaviour
 {
     public static BulletPool Instance;
-    public Bullet bulletprefab;
+    public EnergyBall bulletprefab;
     private int bulletsize = 5;
-    private List<Bullet> bullets= new List<Bullet>();
+    private List<EnergyBall> bullets= new List<EnergyBall>();
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,15 +23,15 @@ public class BulletPool : MonoBehaviour
       
         for (int i = 0; i < bulletsize; i++)
         {
-            Bullet bullet = Instantiate(bulletprefab);
+            EnergyBall bullet = Instantiate(bulletprefab);
             bullet.gameObject.SetActive(false);
             bullets.Add(bullet);
         }
     }
-    public Bullet GetBullet()
+    public EnergyBall GetBullet()
     {
-        foreach (Bullet bullet in bullets)
-        {
+        foreach (EnergyBall bullet in bullets)
+        {   
             if (!bullet.gameObject.activeInHierarchy)
             {
                 return bullet;
