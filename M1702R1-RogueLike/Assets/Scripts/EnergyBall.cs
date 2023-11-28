@@ -1,31 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
 
-public class Bullet : MonoBehaviour
+public class EnergyBall : MonoBehaviour
 {
+    private Animator animatorController;
 
     private float bulletSpeed = 10f;
     private Rigidbody2D rb;
-    private int damage = 5;
+    public int damage = 5;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animatorController = GetComponent<Animator>();
     }
     IEnumerator DestroyBulletAfeterTime()
     {
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
-    private void Update()
-    {
-       
-    }
-
     public void DirectionBullet(Vector2 direction)
     {
         direction.Normalize();
@@ -37,10 +33,25 @@ public class Bullet : MonoBehaviour
     {
         if (other.TryGetComponent(out IDamagable obj))
         {
-            Enemy enemy = (Enemy)obj;
-            enemy.AnimateHit();
-            enemy.TakeDamage(damage);
-            this.gameObject.SetActive(false);
+            if (obj.GetType() == typeof(Player)) return;
+            obj.AnimateHit();
+            obj.TakeDamage(damage);
+            AnimateExplotion();
+        }
+        else if (other.CompareTag("Wall"))
+        {
+            AnimateExplotion();
         }
     }
+
+    private void AnimateExplotion()
+    {
+        this.animatorController.SetBool("Exploded", true);
+        rb.velocity = Vector3.zero;
+        StartCoroutine(DestroyBulletAfeterTime());
+    }
+
+
+
+
 }

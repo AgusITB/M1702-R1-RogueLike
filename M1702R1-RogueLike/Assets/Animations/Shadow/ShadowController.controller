@@ -490,8 +490,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: AnimMoveX
     m_Mirror: 0
-  m_BlendParameter: AttackMoveX
-  m_BlendParameterY: AttackMoveY
+  m_BlendParameter: AnimLastMoveX
+  m_BlendParameterY: AnimLastMoveY
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
