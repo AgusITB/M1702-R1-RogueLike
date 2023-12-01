@@ -709,6 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 2
+  spawned: 0
 --- !u!1 &2154964504367985313
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 3
+  spawned: 0
 --- !u!1 &2386391911472319694
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7780928255774124306}
   - component: {fileID: 6102213747114575733}
+  - component: {fileID: 5238782844299134934}
   m_Layer: 0
   m_Name: NSEO
   m_TagString: Untagged
@@ -873,6 +876,18 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &5238782844299134934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386391911472319694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b592a794c4eec4099175990e9c61a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4252688849002395404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4470,6 +4485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 1
+  spawned: 0
 --- !u!1 &4919869929945464257
 GameObject:
   m_ObjectHideFlags: 0
@@ -6206,3 +6222,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 4
+  spawned: 0

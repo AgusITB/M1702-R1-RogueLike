@@ -13,7 +13,7 @@ public class RoomSpawner : MonoBehaviour
 
     GameObject[] templateArray;
 
-    private bool spawned = false;
+    [SerializeField] private bool spawned = false;
 
 
     private void Start()
