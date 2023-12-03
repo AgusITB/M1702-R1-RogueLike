@@ -50,6 +50,15 @@ public class EnergyBall : MonoBehaviour
         rb.velocity = Vector3.zero;
         StartCoroutine(DestroyBulletAfeterTime());
     }
+    public void SetDirection(Vector3 positionPlayer)
+    {
+        Vector3 direccion = (positionPlayer - transform.position).normalized;
+        rb.velocity = direccion * bulletSpeed;
+
+        float rotacion = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rotacion);
+    }
+
 
 
 
