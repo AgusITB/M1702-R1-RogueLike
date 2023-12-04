@@ -25,7 +25,7 @@ public class MeleeAttack : Ability
         base.Awake();
         pAnimation = GetComponent<PlayerAnimation>();
         Vector3 position = new (rangePosition.position.x, rangePosition.position.y );
-        instantiatedPrefab = Instantiate(meleePrefab, position, Quaternion.AngleAxis(-80, meleeParent.position));
+        instantiatedPrefab = Instantiate(meleePrefab, position, Quaternion.identity);
         instantiatedPrefab.transform.SetParent(meleeParent, true);
         instantiatedPrefab.SetActive(false);
     }
