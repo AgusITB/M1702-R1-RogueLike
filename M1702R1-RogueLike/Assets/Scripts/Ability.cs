@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,7 +44,6 @@ public abstract class Ability : MonoBehaviour
 
         if (abilityName == "RangeAttack")
             playerControls.Gameplay.RangeAttack.performed += Attack;
-
     }
     protected virtual void Attack(InputAction.CallbackContext context)
     {
