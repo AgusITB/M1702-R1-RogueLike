@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CañonController : MonoBehaviour
 {
     //[SerializeField] private Transform Player;
   
-    private float fireRate = 1f;  // Frecuencia de disparo en segundos
+    private float fireRate = 2f;  // Frecuencia de disparo en segundos
     //private float nextFireTime;
 
     public GameObject bullet;
@@ -44,18 +45,30 @@ public class CañonController : MonoBehaviour
 
         float distance= Vector2.Distance(transform.position,player.transform.position);
         Debug.Log(distance);
+
         if(distance < 10)
         {
+            RotateTowards();
             timer += Time.deltaTime;
             if (timer > fireRate)
             {
                 timer = 0;
                 shoot();
             }
-
         }
     }
-    void shoot()
+    private void RotateTowards()
+    {
+        var playerPos = player.transform.position;
+        var position = transform.position;
+
+        float angle = Mathf.Atan2(playerPos.y - position.y, playerPos.x - position.x) * Mathf.Rad2Deg - 90f;
+
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+
+        transform.rotation = targetRotation;
+    }
+    public void shoot()
     {
         Instantiate(bullet,bulletDirection.position,Quaternion.identity);
     }
