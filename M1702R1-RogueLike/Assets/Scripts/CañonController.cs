@@ -5,12 +5,7 @@ using UnityEngine.InputSystem;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CañonController : Ability 
-{
-    //[SerializeField] private Transform Player;
-  
-    private float fireRate = 2f;  // Frecuencia de disparo en segundos
-    //private float nextFireTime;
-
+{ 
     public GameObject bullet;
     public Transform bulletDirection;
     private float timer;
