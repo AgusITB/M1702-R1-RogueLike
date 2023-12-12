@@ -138,13 +138,14 @@ GameObject:
   - component: {fileID: 987238}
   - component: {fileID: 987237}
   - component: {fileID: 987236}
+  - component: {fileID: 987243}
   m_Layer: 0
   m_Name: Skeleton (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &987236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +336,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &987243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627bd796696f13e4a9bef95de038995d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &14691033
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +843,7 @@ RectTransform:
   m_Father: {fileID: 695537681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12600,7 +12613,7 @@ RectTransform:
   m_Father: {fileID: 317316031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12835,6 +12848,7 @@ GameObject:
   - component: {fileID: 1287123894}
   - component: {fileID: 1287123893}
   - component: {fileID: 1287123898}
+  - component: {fileID: 1287123900}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -13032,6 +13046,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1287123900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287123892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627bd796696f13e4a9bef95de038995d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1308109960
 GameObject:
   m_ObjectHideFlags: 0
@@ -13194,13 +13220,14 @@ GameObject:
   - component: {fileID: 1320889523}
   - component: {fileID: 1320889522}
   - component: {fileID: 1320889521}
+  - component: {fileID: 1320889528}
   m_Layer: 0
   m_Name: Skeleton (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1320889521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13391,6 +13418,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1320889528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320889520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627bd796696f13e4a9bef95de038995d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1338986697
 GameObject:
   m_ObjectHideFlags: 0
@@ -13940,13 +13979,14 @@ GameObject:
   - component: {fileID: 1446045152}
   - component: {fileID: 1446045151}
   - component: {fileID: 1446045150}
+  - component: {fileID: 1446045157}
   m_Layer: 0
   m_Name: Skeleton (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1446045150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14137,6 +14177,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1446045157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446045149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627bd796696f13e4a9bef95de038995d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1472661982
 GameObject:
   m_ObjectHideFlags: 0
@@ -14170,7 +14222,7 @@ RectTransform:
   m_Father: {fileID: 1231991965}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

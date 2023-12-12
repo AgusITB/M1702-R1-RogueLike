@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Unit : MonoBehaviour
 {
-
     public Transform target;
     public float speed = 0.05f;
 
     Vector2[] path;
     int targetIndex;
+
 
     void Start()
     {
@@ -21,11 +21,13 @@ public class Unit : MonoBehaviour
 
         while (true)
         {
+          
             if (targetPositionOld != (Vector2)target.position)
             {
                 targetPositionOld = (Vector2)target.position;
 
                 path = Pathfinding.RequestPath(transform.position, target.position);
+                
                 StopCoroutine("FollowPath");
                 StartCoroutine("FollowPath");
             }
