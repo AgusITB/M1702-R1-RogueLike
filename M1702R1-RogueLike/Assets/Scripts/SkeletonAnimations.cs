@@ -25,10 +25,6 @@ public class SkeletonAnimations : MonoBehaviour
 
         Vector3 dir = (this.transform.position - vec).normalized;
 
-       
-        Debug.DrawLine(vec, vec + dir * 10, Color.red, 0.2f);
-
-
         enemyAnimator.SetFloat("directionMagnitude",dir.magnitude);
         enemyAnimator.SetFloat("DirectionX", dir.x);
         enemyAnimator.SetFloat("DirectionY", dir.y);

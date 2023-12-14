@@ -22,10 +22,6 @@ public abstract class Ability : MonoBehaviour
 
     public string AbilityName { get { return abilityName; } }
 
-
-
-
-
     private void OnEnable()
     {
         playerControls.Enable();

@@ -39,6 +39,7 @@ public class RoomSpawner : MonoBehaviour
         if (spawned == false)
         {
             rand = Random.Range(0,templateArray.Length);
+
             Instantiate(templateArray[rand], transform.position, templateArray[rand].transform.rotation);
         }
         spawned = true;

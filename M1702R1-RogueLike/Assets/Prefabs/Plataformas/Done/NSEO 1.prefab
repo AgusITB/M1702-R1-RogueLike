@@ -508,6 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7780928255774124306}
   - component: {fileID: 6102213747114575733}
+  - component: {fileID: 3995377896915059634}
   m_Layer: 0
   m_Name: NSEO 1
   m_TagString: Untagged
@@ -545,6 +546,18 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!114 &3995377896915059634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386391911472319694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac71a4a4f398fe24793d073c49d8b670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4252688849002395404
 GameObject:
   m_ObjectHideFlags: 0

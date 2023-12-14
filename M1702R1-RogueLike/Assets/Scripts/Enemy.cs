@@ -11,11 +11,15 @@ public class Enemy : Character, IDamagable
     Animator enemyAnimator;
     Color dieColor;
 
+    public GameObject player;
+
+    CircleCollider2D rangeCollider;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
         enemyAnimator = GetComponent<Animator>();
+        rangeCollider = GetComponent<CircleCollider2D>();   
 
         dieColor = defaultColor;
         maxHp = 15;
@@ -23,6 +27,7 @@ public class Enemy : Character, IDamagable
         currentHp = maxHp;
         defaultColor = spriteRenderer.color;
     }
+ 
     public void TakeDamage(int damage)
     {
         currentHp -= damage;
@@ -67,6 +72,9 @@ public class Enemy : Character, IDamagable
 
         this.gameObject.SetActive(false);
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        player = collision.gameObject; 
+    }
 
 }

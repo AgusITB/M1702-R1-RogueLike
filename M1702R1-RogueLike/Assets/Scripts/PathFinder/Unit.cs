@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour
     public static Unit instance;
     private void Awake()
     {
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().transform;
         instance = this; 
     }
 
