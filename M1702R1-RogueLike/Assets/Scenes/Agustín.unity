@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 14691044}
   speed: 2
+  currentWaypoint: {x: 0, y: 0}
 --- !u!114 &987237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13018,7 +13019,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 14691044}
-  speed: 2
+  speed: 3
+  currentWaypoint: {x: 0, y: 0}
 --- !u!50 &1287123899
 Rigidbody2D:
   serializedVersion: 4
@@ -13205,6 +13207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 14691044}
   speed: 3
+  currentWaypoint: {x: 0, y: 0}
 --- !u!1 &1320889520
 GameObject:
   m_ObjectHideFlags: 0
@@ -13242,6 +13245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 14691044}
   speed: 2
+  currentWaypoint: {x: 0, y: 0}
 --- !u!114 &1320889522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14001,6 +14005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 14691044}
   speed: 2
+  currentWaypoint: {x: 0, y: 0}
 --- !u!114 &1446045151
 MonoBehaviour:
   m_ObjectHideFlags: 0

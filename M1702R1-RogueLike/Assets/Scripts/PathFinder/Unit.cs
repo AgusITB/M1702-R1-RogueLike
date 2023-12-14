@@ -8,7 +8,13 @@ public class Unit : MonoBehaviour
 
     Vector2[] path;
     int targetIndex;
+    public Vector2 currentWaypoint;
 
+    public static Unit instance;
+    private void Awake()
+    {
+        instance = this; 
+    }
 
     void Start()
     {
@@ -41,7 +47,7 @@ public class Unit : MonoBehaviour
         if (path.Length > 0)
         {
             targetIndex = 0;
-            Vector2 currentWaypoint = path[0];
+            currentWaypoint = path[0];
 
             while (true)
             {

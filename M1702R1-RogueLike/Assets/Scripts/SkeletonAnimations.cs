@@ -20,8 +20,9 @@ public class SkeletonAnimations : MonoBehaviour
     private void Update()
     {
 
-        Vector3 vec = new Vector3(me.target.position.x, me.target.position.y, me.target.position.z);
-    
+        Vector3 vec = Unit.instance.currentWaypoint;
+
+
         Vector3 dir = (this.transform.position - vec).normalized;
 
        
@@ -29,8 +30,8 @@ public class SkeletonAnimations : MonoBehaviour
 
 
         enemyAnimator.SetFloat("directionMagnitude",dir.magnitude);
-        enemyAnimator.SetFloat("DirectionX", me.target.position.x);
-        enemyAnimator.SetFloat("DirectionY", me.target.position.y);
+        enemyAnimator.SetFloat("DirectionX", dir.x);
+        enemyAnimator.SetFloat("DirectionY", dir.y);
     }
 
 
