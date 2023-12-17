@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Roguelike.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/DungeonRooms/BasementStart.unity
+    guid: c22127b3d67939b4db7548ca70435163
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/BasementMain.unity
+    guid: 32bfd146072cdfa43b6e69543d48f6a6
+  - enabled: 1
+    path: Assets/Scenes/DungeonRooms/BasementEmpty.unity
+    guid: d49badb2e3f086f48a37d7bcaaf4d6e8
   m_configObjects: {}

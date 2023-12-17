@@ -1243,6 +1243,7 @@ MonoBehaviour:
   closedRoom: {fileID: 0}
   rooms: []
   waitTime: 5
+  spawnedBoss: 0
   boss: {fileID: 8115700105975005137, guid: 8b5ae426813cb78478abb5ecab88e2e8, type: 3}
 --- !u!1 &557945854
 GameObject:
