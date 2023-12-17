@@ -28,8 +28,8 @@ public class Room : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));  
+       // Gizmos.color = Color.red;
+        //Gizmos.DrawWireCube(transform.position, new Vector3(Width, Height, 0));  
     }
 
     private void OnTriggerEnter2D(Collider2D other)

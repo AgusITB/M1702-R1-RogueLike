@@ -33,10 +33,14 @@ public class RoomController : MonoBehaviour
     public List<Room> loadedRooms = new List<Room>();
 
     bool isLoadingRoom = false;
-    private Room currentRoom;
+
+    //public Room currentRoom;
+
+    Player player;
 
     void Awake()
     {
+        player = FindObjectOfType<Player>();
         instance = this;
     }
 
@@ -124,8 +128,18 @@ public class RoomController : MonoBehaviour
 
     public void OnPlayerEnterRoom(Room room)
     {
+
+        if (CameraController.instance.currentRoom.X > room.X)
+            player.transform.position = new Vector3(player.transform.position.x - 2f, player.transform.position.y);
+        else if (CameraController.instance.currentRoom.X < room.X)
+            player.transform.position = new Vector3(player.transform.position.x + 2f, player.transform.position.y);
+        else if (CameraController.instance.currentRoom.Y > room.Y)
+            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 2f);
+        else if (CameraController.instance.currentRoom.Y < room.Y)
+            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2f);
+
         CameraController.instance.currentRoom = room;
-        currentRoom = room;
+       // currentRoom = room;
 
     }
 
