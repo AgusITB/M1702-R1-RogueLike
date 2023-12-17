@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
@@ -10,7 +11,7 @@ public class RoomInfo
 {
     public string name;
     public int x, y;
-
+    
     public RoomInfo(string name, int x, int y)
     {
 
@@ -21,16 +22,16 @@ public class RoomInfo
 }
 public class RoomController : MonoBehaviour
 {
-
+    private readonly float movePlayerDistance = 5f;
     public static RoomController instance;
 
-    string currentWorldName = "Basement";
+    readonly string currentWorldName = "Basement";
 
     RoomInfo currentLoadRoomData;
 
-    Queue<RoomInfo> loadRoomQueue = new Queue<RoomInfo>();
+    readonly Queue<RoomInfo> loadRoomQueue = new();
 
-    public List<Room> loadedRooms = new List<Room>();
+    public List<Room> loadedRooms = new();
 
     bool isLoadingRoom = false;
 
@@ -42,15 +43,6 @@ public class RoomController : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         instance = this;
-    }
-
-    private void Start()
-    {
-        //LoadRoom("Start", 0, 0);
-        //LoadRoom("Empty", 1, 0);
-        //LoadRoom("Empty",-1, 0);
-        //LoadRoom("Empty", 0, 1);
-        //LoadRoom("Empty", 0, -1);
     }
     private void Update()
     {
@@ -128,18 +120,17 @@ public class RoomController : MonoBehaviour
 
     public void OnPlayerEnterRoom(Room room)
     {
-
         if (CameraController.instance.currentRoom.X > room.X)
-            player.transform.position = new Vector3(player.transform.position.x - 2f, player.transform.position.y);
+            player.transform.position = new Vector3(player.transform.position.x - movePlayerDistance, player.transform.position.y);
         else if (CameraController.instance.currentRoom.X < room.X)
-            player.transform.position = new Vector3(player.transform.position.x + 2f, player.transform.position.y);
+            player.transform.position = new Vector3(player.transform.position.x + movePlayerDistance, player.transform.position.y);
         else if (CameraController.instance.currentRoom.Y > room.Y)
-            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 2f);
+            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - movePlayerDistance);
         else if (CameraController.instance.currentRoom.Y < room.Y)
-            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2f);
+            player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + movePlayerDistance);
 
         CameraController.instance.currentRoom = room;
-       // currentRoom = room;
+        // currentRoom = room;
 
     }
 
