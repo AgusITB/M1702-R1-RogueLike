@@ -1,49 +1,44 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ParticleController : MonoBehaviour
+public class ParticleController : Ability
 {
-    public ParticleSystem particle; // Asigna el sistema de partículas desde el Inspector
-    private bool isMousePressed = false; // Variable para verificar si el botón izquierdo del ratón está presionado
+    public ParticleSystem particle;
+    private bool isMousePressed = false;
 
     void Update()
     {
-        // Verifica si el botón izquierdo del ratón está presionado
-        if (Mouse.current.leftButton.isPressed)
-        {
-            if (!isMousePressed) // Solo si el botón acaba de ser presionado
-            {
-                ActivateParticles();
-            }
-            isMousePressed = true;
-        }
-        else
-        {
-            isMousePressed = false;
-            particle.Stop();
-        }
+
+
+
+
+        //isMousePressed = false;
+        //particle.Stop();
+
     }
 
-    void ActivateParticles()
+    public override void Cast()
     {
-        // Establece la posición del sistema de partículas al punto de spawn del personaje
         particle.transform.position = transform.position;
-
-        // Obtiene la dirección del mouse respecto al personaje (en 2D)
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector3 direction = (mousePosition - transform.position).normalized;
+        Debug.Log(particle.transform.position);
+        var mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = (mouseDirection - transform.position);
+        direction.Normalize();
 
         // Calcula el ángulo en radianes
-        float angle = Mathf.Atan2(direction.y, direction.x);
+        float rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Convierte el ángulo a grados
-        angle *= Mathf.Rad2Deg;
-
-        // Aplica la rotación al sistema de partículas
-        particle.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        // Activa y reproduce las partículas
+        //rotación al sistema de partículas
+        particle.transform.rotation = Quaternion.Euler(0, 0, rotation);
         particle.Play();
+
+        StartCoroutine(StopParticleSystem());
+    }
+    IEnumerator StopParticleSystem()
+    {
+        yield return new WaitForSeconds(2f);
+        particle.Stop();
     }
 }
 
