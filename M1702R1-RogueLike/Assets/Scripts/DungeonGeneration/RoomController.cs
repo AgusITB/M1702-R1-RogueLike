@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Transactions;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class RoomInfo
 {
     public string name;
     public int x, y;
-    
+
     public RoomInfo(string name, int x, int y)
     {
 
@@ -35,6 +36,10 @@ public class RoomController : MonoBehaviour
 
     bool isLoadingRoom = false;
 
+    bool spawnedBossRoom = false;
+
+    bool updatedRooms = false;
+
     //public Room currentRoom;
 
     Player player;
@@ -56,12 +61,40 @@ public class RoomController : MonoBehaviour
         }
         if (loadRoomQueue.Count == 0)
         {
+            if (!spawnedBossRoom)
+            {
+                StartCoroutine(SpawnBossRoom());
+            }
+            else if (spawnedBossRoom && !updatedRooms)
+            {
+                foreach (Room room in loadedRooms)
+                {
+                    room.RemoveUnconnectedDoors();
+                }
+                updatedRooms = true;
+            }
             return;
         }
         currentLoadRoomData = loadRoomQueue.Dequeue();
         isLoadingRoom = true;
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
     }
+
+    IEnumerator SpawnBossRoom()
+    {
+        spawnedBossRoom = true;
+        yield return new WaitForSeconds(0.5f);
+        if (loadRoomQueue.Count == 0)
+        {
+            Room bossRoom = loadedRooms[^1];
+            Vector2Int tempRoom = new Vector2Int(bossRoom.X, bossRoom.Y);
+            Destroy(bossRoom.gameObject);
+            var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
+            loadedRooms.Remove(roomToRemove);
+            LoadRoom("End", tempRoom.x, tempRoom.y);
+        }
+    }
+
     public void LoadRoom(string name, int x, int y)
     {
         if (DoesRoomExist(x, y))
@@ -104,6 +137,7 @@ public class RoomController : MonoBehaviour
             }
 
             loadedRooms.Add(room);
+
         }
         else
         {
@@ -117,7 +151,10 @@ public class RoomController : MonoBehaviour
     {
         return loadedRooms.Find(room => room.X == x && room.Y == y) != null;
     }
-
+    public Room FindRoom(int x, int y)
+    {
+        return loadedRooms.Find(room => room.X == x && room.Y == y);
+    }
     public void OnPlayerEnterRoom(Room room)
     {
         if (CameraController.instance.currentRoom.X > room.X)
