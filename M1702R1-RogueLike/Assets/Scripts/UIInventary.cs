@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIInventary : MonoBehaviour
 {
     [SerializeField]
-    private UIInventaryItem itemprebab;
+    UIInventaryItem[] arrayInventory;
 
-    [SerializeField]
-    private RectTransform panel;
+    public List<UIInventaryItem> _Inventory { get; private set; }
 
-
-    public void Show()
+    private void Awake()
     {
-        gameObject.SetActive(true);
+        _Inventory = new List<UIInventaryItem>();
+        _Inventory = arrayInventory.OrderBy(i => i.Name).ToList();
     }
-    public void Hide()
+    public void AddItem(UIInventaryItem item)
     {
-        gameObject.SetActive(false);
+        if (item != null)
+        {
+            _Inventory.Add(item);
+        }
     }
-
-
+    public void RemoveItem(UIInventaryItem item)
+    {
+        if (item != null)
+        {
+            _Inventory.Remove(item);
+        }
+    }
 }
