@@ -17,7 +17,7 @@ public class ItemReference : MonoBehaviour
         Icon.sprite= item.Icon;
         UpdateCount();
     }
-    private void UpdateCount()
+    public void UpdateCount()
     {
         CountText.text="x"+ _Item.Count.ToString();
     }

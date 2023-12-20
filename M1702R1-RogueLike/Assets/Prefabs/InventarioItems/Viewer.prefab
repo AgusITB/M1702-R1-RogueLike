@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1864195732901664587}
   - component: {fileID: 5750941460454019726}
   - component: {fileID: 3781935393549231800}
+  - component: {fileID: 6608481769678265075}
   m_Layer: 5
   m_Name: Viewer
   m_TagString: Untagged
@@ -92,6 +93,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 8383504420746306935}
   CountText: {fileID: 6331800416988592432}
+--- !u!114 &6608481769678265075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2761142184846330855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094b2111999783d4bb1a78c00c8555ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2947356320885897844
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -236,7 +249,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -376945712, guid: 9a0fc3a6ad3cc044a92cc95bc0ab7230, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
