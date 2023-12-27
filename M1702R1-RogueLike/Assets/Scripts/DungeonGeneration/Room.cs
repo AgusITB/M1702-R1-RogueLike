@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -17,6 +19,18 @@ public class Room : MonoBehaviour
     public List<Door> doors = new();
 
     private bool updatedDoors = false;
+
+    public double distance = double.MinValue;
+    public bool visited = false;
+
+    private double DistanceFromOrigin(int X, int Y)
+    {
+        int x = X;
+        int y = Y;
+        return Math.Sqrt(x * x + y * y);
+    }
+
+
 
     private void Update()
     {
@@ -55,6 +69,7 @@ public class Room : MonoBehaviour
             }
         }
         RoomController.instance.RegisterRoom(this);
+        distance = DistanceFromOrigin(X, Y);
     }
 
 
@@ -132,9 +147,7 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // CameraController.instance.UpdatePosition();
             RoomController.instance.OnPlayerEnterRoom(this);
-
         }
     }
 }

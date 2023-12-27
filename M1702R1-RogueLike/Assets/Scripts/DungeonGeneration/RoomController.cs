@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -80,20 +81,54 @@ public class RoomController : MonoBehaviour
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
     }
 
+    /// <summary>
+    /// Funcion que espera 0.5 segundos para comprobar si ya se han generado todas las habitaciones,
+    /// si ya no queda ninguna habitación en la cola, buscamos la ultima habitación generada de la lista,
+    /// destruimos dicha habitacion y la borramos de la lista y finalmente generamos la 
+    /// habitación de tipo Boss en su lugar.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SpawnBossRoom()
     {
         spawnedBossRoom = true;
         yield return new WaitForSeconds(0.5f);
         if (loadRoomQueue.Count == 0)
         {
-            Room bossRoom = loadedRooms[^1];
-            Vector2Int tempRoom = new Vector2Int(bossRoom.X, bossRoom.Y);
+
+            //Room bossRoom = loadedRooms[^1];
+            Room bossRoom = GetFarthestRoom();
+            Vector2Int tempRoom = new(bossRoom.X, bossRoom.Y);
             Destroy(bossRoom.gameObject);
             var roomToRemove = loadedRooms.Single(r => r.X == tempRoom.x && r.Y == tempRoom.y);
             loadedRooms.Remove(roomToRemove);
             LoadRoom("End", tempRoom.x, tempRoom.y);
         }
     }
+
+
+    private Room GetFarthestRoom()
+    {
+        if (loadedRooms.Count == 0)
+        {
+            // Handle the case when there are no rooms loaded
+            return null; // or throw an exception, log a message, etc.
+        }
+
+        Room farthestRoom = loadedRooms[0];
+        foreach (Room room in loadedRooms)
+        {
+            if (room.distance > farthestRoom.distance)
+            {
+                farthestRoom = room;
+            }
+        }
+        return farthestRoom;
+    }
+
+
+
+
+
 
     public void LoadRoom(string name, int x, int y)
     {
