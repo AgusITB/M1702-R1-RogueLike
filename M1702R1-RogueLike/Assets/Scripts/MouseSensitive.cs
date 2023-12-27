@@ -7,6 +7,7 @@ public class MouseSensitive : MonoBehaviour, IPointerClickHandler,IPointerEnterH
 {
     public static event System.Action<string, string> MouseOn;
     public static event System.Action MouseOff;
+
     private ItemReference reference;
     // Start is called before the first frame update
     void Start()

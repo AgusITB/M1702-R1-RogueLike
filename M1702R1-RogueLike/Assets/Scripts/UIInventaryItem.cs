@@ -12,12 +12,16 @@ public class UIInventaryItem : ScriptableObject
     public string Description;
     public int ID { get; private set; }
 
-    public int Count { get {
+    public int Count
+    {
+        get
+        {
             return
                 FindObjectOfType<UIInventary>()._Inventory.FindAll(
                     x => x.ID == this.ID).Count;
-        
-        } }
+
+        }
+    }
 
     private void OnEnable()
     {

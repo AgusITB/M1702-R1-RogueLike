@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Character, IDamagable
+public class Player : Character, IDamagable, ICoinCollectible
 {
 
     private PlayerInputs playerinput;
@@ -34,5 +34,10 @@ public class Player : Character, IDamagable
     public void TakeDamage(int damage)
     {
         
+    }
+    public void CollectCoins(int coinValue)
+    {
+        
+        Debug.Log("Recogidas " + coinValue + " monedas");
     }
 }

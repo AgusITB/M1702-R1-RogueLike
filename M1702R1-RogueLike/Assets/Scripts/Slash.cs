@@ -14,7 +14,14 @@ public class Slash : MonoBehaviour
             Enemy enemy = (Enemy)obj;
             enemy.AnimateHit();
             enemy.TakeDamage(damage);
+
+            if (other.TryGetComponent(out ICoinCollectible coinCollectible))
+            {
+                Player player = (Player)coinCollectible;
+                player.CollectCoins(2); 
+            }
         }
+        
     }
 
     public void EndAnimation()
