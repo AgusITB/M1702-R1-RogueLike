@@ -13,7 +13,7 @@ public class PlayerInputs : MonoBehaviour
 
     private PlayerControls playerControls;
 
-    PlayerMovement pMovement;
+    private PlayerMovement playerMovement;
 
     public Vector2 direction;
     public Vector2 lastMoveDirection;
@@ -37,7 +37,7 @@ public class PlayerInputs : MonoBehaviour
             Destroy(gameObject);
         }
 
-        pMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovement>();
 
         playerControls = new PlayerControls();
 
@@ -60,10 +60,10 @@ public class PlayerInputs : MonoBehaviour
         lastMoveDirection.x = mouseDirection.x;
         lastMoveDirection.y = mouseDirection.y;
 
-        pMovement.Move(direction, lastMoveDirection);
+        playerMovement.Move(direction, lastMoveDirection);
 
     }
-   
+
     private Vector2 GetMousePosition(InputAction.CallbackContext context)
     {
         Vector3 mousePos = context.ReadValue<Vector2>();
@@ -80,12 +80,12 @@ public class PlayerInputs : MonoBehaviour
         direction.x = input.x;
         direction.y = input.y;
 
-        pMovement.Move(direction, lastMoveDirection);
+        playerMovement.Move(direction, lastMoveDirection);
     }
 
-   
 
-   
+
+
 
 
 }

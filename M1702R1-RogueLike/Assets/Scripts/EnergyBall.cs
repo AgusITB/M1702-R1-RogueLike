@@ -8,7 +8,7 @@ public class EnergyBall : MonoBehaviour
 {
     private Animator animatorController;
 
-    private float bulletSpeed = 10f;
+    private float bulletSpeed = 20f;
     private Rigidbody2D rb;
     public int damage = 5;
 

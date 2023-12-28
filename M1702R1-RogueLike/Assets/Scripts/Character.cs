@@ -7,8 +7,5 @@ public class Character : MonoBehaviour
     public int maxHp;
     public int currentHp;
     public int speed;
-
-
-
  
 }
