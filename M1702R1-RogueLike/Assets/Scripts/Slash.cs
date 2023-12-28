@@ -33,23 +33,6 @@ public class Slash : MonoBehaviour
 
         }
     }
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        ICoinCollectible coinCollectible = collision.gameObject.GetComponent<ICoinCollectible>();
-
-        if (coinCollectible != null)
-        {
-            Debug.Log("Colisión con ICoinCollectible detectada");
-            Player player = coinCollectible as Player;
-
-            if (player != null)
-            {
-                player.CollectCoins(2);
-                Destroy(collision.gameObject);
-                Debug.Log("Moneda recolectada por el jugador");
-            }
-        }
-    }
 
     public void EndAnimation()
     {

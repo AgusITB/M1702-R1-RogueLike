@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : Character, IDamagable
 {
+    public GameObject monedaPrefab;
     EnemyHealthBar healthBar;
     SpriteRenderer spriteRenderer;
     Color defaultColor;
@@ -32,7 +33,11 @@ public class Enemy : Character, IDamagable
 
         healthBar.UpdateHealthBar(currentHp, maxHp);
 
-        if (currentHp <= 0) Die();
+        if (currentHp <= 0) 
+        {
+            Die();
+            
+        }
 
     }
     public void AnimateHit()
@@ -43,8 +48,11 @@ public class Enemy : Character, IDamagable
     }
     public void Die()
     {
+        StopAllCoroutines(); // Detener todas las coroutines activas
         enemyAnimator.SetBool("isDead", true);
         dieColor.a = 0;
+
+        Instantiate(monedaPrefab, transform.position, Quaternion.identity);
         StartCoroutine(Despawn(defaultColor, dieColor, 1f));
 
     }
@@ -56,6 +64,7 @@ public class Enemy : Character, IDamagable
 
     IEnumerator Despawn(Color start, Color end, float duration)
     {
+        yield return new WaitForSeconds(0.5f);
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             float normalizedTime = t / duration;

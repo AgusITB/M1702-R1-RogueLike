@@ -38,7 +38,7 @@ public class Player : Character, IDamagable, ICoinCollectible
     public void CollectCoins(int coinValue)
     {
         totalCoins += coinValue;
-        Debug.Log("Recogidas " + coinValue + " puntos. Total: " + totalCoins + "monedas");
+        Debug.Log("Recogidas " + coinValue + " puntos. Total: " + totalCoins + " monedas ");
         UpdateCoinsText(totalCoins);
     }
 
@@ -46,7 +46,7 @@ public class Player : Character, IDamagable, ICoinCollectible
     {
         if (coinsText != null)
         {
-            coinsText.text = "+" + value.ToString();
+            coinsText.text = " + " + value.ToString();
         }
     }
 }
