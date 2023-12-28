@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class ParticleController : Ability
 {
     public ParticleSystem particle;
-    private bool isMousePressed = false;
+    //private bool isMousePressed = false;
 
     void Update()
     {
