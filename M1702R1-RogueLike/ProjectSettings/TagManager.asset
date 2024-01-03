@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - SpawnPoint
   - Rooms
+  - playerHealthBar
   layers:
   - Default
   - TransparentFX
