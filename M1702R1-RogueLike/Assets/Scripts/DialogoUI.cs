@@ -116,11 +116,17 @@ public class DialogoUI : MonoBehaviour
                 
                 }
                 //DialogoManager.speakActual.diaLocalIn = index;
-                break;
+                //break;
             //default:
                 Debug.LogWarning("Estas pasando un valor no admitido");
             break;
 
         }
     }
+    //IEnumerator EscribirTexto()
+    //{
+    //    convText.maxVisibleCharacters= 0;
+    //    convText.text = conversacion.dialogos[index].dialogo;
+    //    convText.richText = true;
+    //}
 }
