@@ -13,7 +13,6 @@ public class InventoryToggle : MonoBehaviour
         }
         else
         {
-            
             inventoryManager.SetActive(false);
         }
     }
