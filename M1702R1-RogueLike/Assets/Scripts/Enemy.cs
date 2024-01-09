@@ -12,8 +12,6 @@ public class Enemy : Character, IDamagable
     Animator enemyAnimator;
     Color dieColor;
 
-    public GameObject player;
-
     CircleCollider2D rangeCollider;
     private void Awake()
     {
@@ -81,9 +79,5 @@ public class Enemy : Character, IDamagable
 
         this.gameObject.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        player = collision.gameObject; 
-    }
-
+    
 }

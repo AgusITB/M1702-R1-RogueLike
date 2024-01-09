@@ -1,12 +1,21 @@
 using UnityEngine;
 
-public class Moneda : MonoBehaviour, ICoinCollectible
+public class Moneda : MonoBehaviour, ICollectable
 {
-    public void CollectCoins(int valor)
+    int value = 5;
+    public void CollectItem()
     {
-        Debug.Log("Moneda recolectada con valor: " + valor);
         Destroy(gameObject);
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out ICollector obj))
+        {
+            Debug.Log("Moneda recogida");
+            Player player = (Player)obj;
+            player.TakeItem(value);
+            CollectItem();
+        }
+    }
 }

@@ -587,10 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34603fd4372c5e04c996495580d10dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 15
-  currentHp: 15
-  speed: 0
-  player: {fileID: 0}
+  monedaPrefab: {fileID: 0}
 --- !u!114 &494625232262372318
 MonoBehaviour:
   m_ObjectHideFlags: 0

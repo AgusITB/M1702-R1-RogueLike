@@ -16,22 +16,6 @@ public class Slash : MonoBehaviour
             enemy.AnimateHit();
             enemy.TakeDamage(damage);
         }
-        //if(other.TryGetComponent(out ICoinCollectible coinCollectible))
-        //{
-        //    Player player = (Player)coinCollectible;
-        //    player.CollectCoins(valor);
-        //}
-        if (other.CompareTag("Moneda"))
-        {
-            Player player = GetComponent<Player>();
-            if (player != null)
-            {
-                player.CollectCoins(2);
-            }
-
-            Destroy(other.gameObject);
-
-        }
     }
 
     public void EndAnimation()

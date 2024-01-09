@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Player : Character, IDamagable, ICoinCollectible
+public class Player : Character, IDamagable, ICollector
 {
 
     public int Money { get; set; }
@@ -84,13 +84,13 @@ public class Player : Character, IDamagable, ICoinCollectible
         }
     }
 
-    public void CollectCoins(int coinValue)
+    public void TakeItem(int value)
     {
-        totalCoins += coinValue;
-        Debug.Log("Recogidas " + coinValue + " puntos. Total: " + totalCoins + " monedas ");
+        Debug.Log("Moneda sumada");
+        totalCoins += value;
+        Debug.Log("Recogidas " + value + " puntos. Total: " + totalCoins + " monedas ");
         UpdateCoinsText(totalCoins);
     }
-
     private void UpdateCoinsText(int value)
     {
         if (coinsText != null)

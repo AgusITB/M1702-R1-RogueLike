@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface ICoinCollectible
+public interface ICollectable
 {
-
-    public void CollectCoins(int coinValue);
+    public void CollectItem();
 }

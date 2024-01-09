@@ -44,7 +44,7 @@ public abstract class Ability : MonoBehaviour
     protected virtual void Attack(InputAction.CallbackContext context)
     {
         if(CooldownHandler.Instance.IsOnCooldown(this)) { return; }
-        Debug.Log($"I am casting: {abilityName}");
+       // Debug.Log($"I am casting: {abilityName}");
         Cast();
         CooldownHandler.Instance.PutOnCooldown(this);
     }
