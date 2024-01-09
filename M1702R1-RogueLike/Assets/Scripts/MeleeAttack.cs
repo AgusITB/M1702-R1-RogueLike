@@ -1,13 +1,5 @@
-using JetBrains.Annotations;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+
 
 public class MeleeAttack : Ability
 {
@@ -25,7 +17,7 @@ public class MeleeAttack : Ability
         base.Awake();
         pAnimation = GetComponent<PlayerAnimation>();
         Vector3 position = new (rangePosition.position.x, rangePosition.position.y );
-        instantiatedPrefab = Instantiate(meleePrefab, position, Quaternion.AngleAxis(-80, meleeParent.position));
+        instantiatedPrefab = Instantiate(meleePrefab, position, Quaternion.identity);
         instantiatedPrefab.transform.SetParent(meleeParent, true);
         instantiatedPrefab.SetActive(false);
     }

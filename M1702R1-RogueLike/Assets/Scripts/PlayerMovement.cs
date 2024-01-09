@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 rangeDirection;
 
 
-    private int speed = 5;
+    private int speed = 10;
 
 
     private void Awake()

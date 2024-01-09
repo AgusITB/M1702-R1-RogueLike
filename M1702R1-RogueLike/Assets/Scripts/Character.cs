@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public int maxHp;
-    public int currentHp;
-    public int speed;
-
-
-
+    protected int maxHp;
+    protected int currentHp;
+    protected int speed;
  
 }

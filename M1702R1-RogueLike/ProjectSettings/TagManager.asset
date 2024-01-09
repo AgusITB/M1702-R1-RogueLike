@@ -7,14 +7,15 @@ TagManager:
   - Wall
   - SpawnPoint
   - Rooms
+  - playerHealthBar
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Doors
   - Water
   - UI
-  - 
+  - unWalkable
   - 
   - 
   - 

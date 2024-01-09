@@ -7,7 +7,7 @@ public class CooldownHandler : MonoBehaviour
 {
     public static CooldownHandler Instance;
 
-    [SerializeField] private List<CooldownData> abilitiesOnCooldown = new List<CooldownData>();
+    [SerializeField] private List<CooldownData> abilitiesOnCooldown = new();
 
     [System.Serializable]
     private class CooldownData
@@ -40,7 +40,7 @@ public class CooldownHandler : MonoBehaviour
     /// <param name="ability"></param>
     public void PutOnCooldown(Ability ability)
     {
-        CooldownData abilitycd = new CooldownData(ability, ability.AbilityCooldown);
+        CooldownData abilitycd = new(ability, ability.AbilityCooldown);
 
         abilitiesOnCooldown.Add(abilitycd);
         StartCoroutine(Cooldown(abilitycd,ability));
@@ -72,7 +72,7 @@ public class CooldownHandler : MonoBehaviour
         {
             if (cooldownData.ability == ability)
             { 
-                Debug.Log($"{ability.AbilityName} is on cooldown for another {cooldownData.cooldown} seconds");
+               // Debug.Log($"{ability.AbilityName} is on cooldown for another {cooldownData.cooldown} seconds");
                 return true;
             }
            
