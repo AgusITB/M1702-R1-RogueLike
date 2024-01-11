@@ -18,7 +18,7 @@ public class MouseSensitive : MonoBehaviour, IPointerClickHandler,IPointerEnterH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-       
+        Debug.Log("Hola");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

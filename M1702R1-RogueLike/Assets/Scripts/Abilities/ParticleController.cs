@@ -17,7 +17,7 @@ public class ParticleController : Ability
 
         // Change the start rotation
         ParticleSystem.MainModule mainModule = particleSystem.main;
-        mainModule.startRotation = 0;
+        mainModule.startRotation = new ParticleSystem.MinMaxCurve(0.0f, 360.0f);
     }
     public override void Cast()
     {
@@ -29,10 +29,6 @@ public class ParticleController : Ability
 
         // Calcula el ángulo en radianes
         float rotation = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        ParticleSystem.MainModule mainModule = particleSystem.main;
-        mainModule.startRotation = 0;
-
         //rotación al sistema de partículas
         particleSystem.transform.rotation = Quaternion.Euler(0, 0, rotation);
         particleSystem.Play();

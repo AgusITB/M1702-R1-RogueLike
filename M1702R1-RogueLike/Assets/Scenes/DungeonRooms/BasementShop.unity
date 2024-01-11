@@ -8057,10 +8057,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1630101905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 406857bfc396aea44b029aba925c1be1, type: 3}
+  m_Script: {fileID: 11500000, guid: b09d8ea0a2e8d3d4eaa45fdcad7a8a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDescription: Increases the max hp by 5 to the player
+  potionSO: {fileID: 11400000, guid: a60a4dfc235249444a6ab57d07b1dd23, type: 2}
 --- !u!1 &1631881858
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class DungeonGenerator : MonoBehaviour
 
         foreach (Vector2Int roomLocation in rooms)
         {
-            if(Random.Range(0,3)==2 && !shopGenerated)
+            if(/*Random.Range(0,3)==2 &&*/ !shopGenerated)
             {
                 shopGenerated = true;   
                 RoomController.instance.LoadRoom("Shop", roomLocation.x, roomLocation.y);

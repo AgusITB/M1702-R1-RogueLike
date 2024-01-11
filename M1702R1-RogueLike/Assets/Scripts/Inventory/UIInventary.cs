@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class UIInventary : MonoBehaviour
 {
-    [SerializeField]
-    UIInventaryItem[] arrayInventory;
 
-    public List<UIInventaryItem> _Inventory { get; private set; }
+    [SerializeField] List<UIInventaryItem> arrayInventory;
+
+    public List<UIInventaryItem> _Inventory;
+
+    public static UIInventary instance;
 
     private void Awake()
     {
+        if (instance != null) Destroy(this);
+        else instance = this;
+
+
         _Inventory = new List<UIInventaryItem>();
         _Inventory = arrayInventory.OrderBy(i => i.Name).ToList();
     }
@@ -20,6 +26,8 @@ public class UIInventary : MonoBehaviour
         if (item != null)
         {
             _Inventory.Add(item);
+            arrayInventory.Add(item);
+            CreateMenuInventari.instance.InstatiateElement(item);
         }
     }
     public void RemoveItem(UIInventaryItem item)
@@ -27,6 +35,7 @@ public class UIInventary : MonoBehaviour
         if (item != null)
         {
             _Inventory.Remove(item);
+            arrayInventory.Remove(item);
         }
     }
 }
