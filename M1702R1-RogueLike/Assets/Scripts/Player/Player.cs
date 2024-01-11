@@ -18,9 +18,9 @@ public class Player : Character, IDamagable, ICollector
     public Text coinsText;
     private int totalCoins = 0;
 
-    private PlayerInputs playerinput;
-    private PlayerAnimation playerAnimation;
-    private PlayerMovement playerMovement;
+    //private PlayerInputs playerinput;
+    //private PlayerAnimation playerAnimation;
+    //private PlayerMovement playerMovement;
 
     private void Awake()
     {

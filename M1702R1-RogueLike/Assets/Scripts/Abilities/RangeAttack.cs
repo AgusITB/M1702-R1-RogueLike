@@ -24,8 +24,12 @@ public class RangeAttack : Ability
 
     public override void Cast()
     {
+        
+        EnergyBall g = BulletPool.Instance.GetBullet();
+        if (g == null) { return; }
+        g.transform.SetPositionAndRotation(bulletDirection.transform.position, bulletDirection.rotation);
         StartCoroutine(pAnimation.Attack(this.AbilityName));
-        EnergyBall g = Instantiate(bulletPrefab, bulletDirection.transform.position, bulletDirection.rotation);
+   
 
         var mouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         g.gameObject.SetActive(true);

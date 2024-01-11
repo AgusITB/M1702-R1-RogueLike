@@ -40,6 +40,8 @@ public abstract class Ability : MonoBehaviour
 
         if (abilityName == "RangeAttack")
             playerControls.Gameplay.RangeAttack.performed += Attack;
+        if (abilityName == "FlameThrower")
+            playerControls.Gameplay.FlameThrower.performed += Attack;
     }
     protected virtual void Attack(InputAction.CallbackContext context)
     {

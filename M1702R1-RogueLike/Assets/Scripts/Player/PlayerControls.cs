@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FlameThrower"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8f98c1d-d315-43e6-bf93-b97b0393eb68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""FollowMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""756c05e9-5ff1-4dcd-9149-7eb4542bc634"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlameThrower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +239,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_RangeAttack = m_Gameplay.FindAction("RangeAttack", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_FollowMouse = m_Gameplay.FindAction("FollowMouse", throwIfNotFound: true);
+        m_Gameplay_FlameThrower = m_Gameplay.FindAction("FlameThrower", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,6 +305,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_RangeAttack;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_FollowMouse;
+    private readonly InputAction m_Gameplay_FlameThrower;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -292,6 +314,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @RangeAttack => m_Wrapper.m_Gameplay_RangeAttack;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @FollowMouse => m_Wrapper.m_Gameplay_FollowMouse;
+        public InputAction @FlameThrower => m_Wrapper.m_Gameplay_FlameThrower;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -313,6 +336,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @FollowMouse.started += instance.OnFollowMouse;
             @FollowMouse.performed += instance.OnFollowMouse;
             @FollowMouse.canceled += instance.OnFollowMouse;
+            @FlameThrower.started += instance.OnFlameThrower;
+            @FlameThrower.performed += instance.OnFlameThrower;
+            @FlameThrower.canceled += instance.OnFlameThrower;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -329,6 +355,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @FollowMouse.started -= instance.OnFollowMouse;
             @FollowMouse.performed -= instance.OnFollowMouse;
             @FollowMouse.canceled -= instance.OnFollowMouse;
+            @FlameThrower.started -= instance.OnFlameThrower;
+            @FlameThrower.performed -= instance.OnFlameThrower;
+            @FlameThrower.canceled -= instance.OnFlameThrower;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -352,5 +381,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRangeAttack(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnFollowMouse(InputAction.CallbackContext context);
+        void OnFlameThrower(InputAction.CallbackContext context);
     }
 }
