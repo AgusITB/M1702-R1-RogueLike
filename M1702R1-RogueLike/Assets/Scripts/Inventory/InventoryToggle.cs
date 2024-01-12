@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class InventoryToggle : MonoBehaviour
 {
-    public GameObject inventoryManager; 
-
+    public GameObject inventoryManager;
+    public static Action openInventory;
     void Start()
     {
         
@@ -33,10 +34,15 @@ public class InventoryToggle : MonoBehaviour
         {
             
             inventoryManager.SetActive(!inventoryManager.activeSelf);
+                   
+            if(inventoryManager.activeInHierarchy) openInventory.Invoke();
         }
         else
         {
             Debug.LogWarning("El objeto InventoryManager no está asignado");
         }
     }
+
+
+  
 }

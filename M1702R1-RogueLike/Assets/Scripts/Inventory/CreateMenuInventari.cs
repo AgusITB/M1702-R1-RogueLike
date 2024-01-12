@@ -5,9 +5,20 @@ using UnityEngine;
 public class CreateMenuInventari : MonoBehaviour
 {
     public ItemReference _element;
-    private List<UIInventaryItem> _inventory;
+    [SerializeField] private List<UIInventaryItemSO> _inventory;
 
     public static CreateMenuInventari instance;
+
+
+    private void OnEnable()
+    {
+        InventoryToggle.openInventory += UpdateELements; 
+    }
+
+    private void OnDisable()
+    {
+        InventoryToggle.openInventory -= UpdateELements;
+    }
 
     private void Awake()
     {
@@ -16,7 +27,7 @@ public class CreateMenuInventari : MonoBehaviour
     }
     void Start()
     {
-        _inventory = new List<UIInventaryItem>();
+        _inventory = new List<UIInventaryItemSO>();
         _inventory = FindObjectOfType<UIInventary>()._Inventory;
         InstantiateElements();
     }
@@ -29,7 +40,14 @@ public class CreateMenuInventari : MonoBehaviour
             (Instantiate(_element, transform) as ItemReference).SetValues(_inventory[i]);
         }
     }
-    public void InstatiateElement(UIInventaryItem item)
+    public void UpdateELements()
+    {
+        for (int i = 0; i < _inventory.Count; i++)
+        {
+            (_element as ItemReference).SetValues(_inventory[i]);
+        }
+    }
+    public void InstatiateElement(UIInventaryItemSO item)
     {
         (Instantiate(_element, transform) as ItemReference).SetValues(item);
     }

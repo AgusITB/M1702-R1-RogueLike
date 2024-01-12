@@ -24,7 +24,7 @@ public class MouseSensitive : MonoBehaviour, IPointerClickHandler,IPointerEnterH
     public void OnPointerEnter(PointerEventData eventData)
     {
         ChangeColor(Color.white);
-        MouseOn?.Invoke(reference._Item.Name, reference._Item.Description);
+        MouseOn?.Invoke(reference.Item.Name, reference.Item.Description);
     }
 
     public void OnPointerExit(PointerEventData eventData)

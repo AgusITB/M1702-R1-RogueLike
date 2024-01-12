@@ -9,16 +9,16 @@ public class ItemReference : MonoBehaviour
     public Image Icon;
     public Text CountText;
 
-    public UIInventaryItem _Item { get; private set; }
+    public UIInventaryItemSO Item { get; private set; }
 
-    public void SetValues(UIInventaryItem item)
+    public void SetValues(UIInventaryItemSO item)
     {
-        _Item = item;
+        Item = item;
         Icon.sprite= item.Icon;
         UpdateCount();
     }
     public void UpdateCount()
     {
-        CountText.text="x"+ _Item.Count.ToString();
+       CountText.text="x"+ Item.Count.ToString();
     }
 }
