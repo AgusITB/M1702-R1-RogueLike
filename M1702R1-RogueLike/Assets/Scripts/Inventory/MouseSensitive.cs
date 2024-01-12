@@ -13,7 +13,10 @@ public class MouseSensitive : MonoBehaviour, IPointerClickHandler,IPointerEnterH
     void Start()
     {
         reference = GetComponent<ItemReference>();
-        ChangeColor(Color.gray);
+        if (reference.Item != null )
+        {
+            ChangeColor(Color.white);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -23,14 +26,22 @@ public class MouseSensitive : MonoBehaviour, IPointerClickHandler,IPointerEnterH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ChangeColor(Color.white);
-        MouseOn?.Invoke(reference._Item.Name, reference._Item.Description);
+       
+        if (reference.Item != null)
+        {
+            ChangeColor(Color.white);
+            MouseOn?.Invoke(reference.Item.Name, reference.Item.Description);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ChangeColor(Color.gray);
-        MouseOff?.Invoke();
+        if (reference.Item != null)
+        {
+            ChangeColor(Color.gray);
+            MouseOff?.Invoke();
+        }
+ 
     }
 
     private void ChangeColor(Color _color) => reference.Icon.color = _color;

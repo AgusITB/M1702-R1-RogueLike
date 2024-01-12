@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
-    void Usar()
-    {
-
-    }
+    public UIInventaryItemSO itemSO;
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
     }

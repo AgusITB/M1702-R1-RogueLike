@@ -5487,7 +5487,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7566,7 +7566,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8060,7 +8060,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09d8ea0a2e8d3d4eaa45fdcad7a8a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionSO: {fileID: 11400000, guid: a60a4dfc235249444a6ab57d07b1dd23, type: 2}
+  arrayInventory: []
+  _Inventory: []
+  itemSO: {fileID: 11400000, guid: a60a4dfc235249444a6ab57d07b1dd23, type: 2}
 --- !u!1 &1631881858
 GameObject:
   m_ObjectHideFlags: 0

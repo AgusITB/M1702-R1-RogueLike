@@ -5,24 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 class HealingPotion : Item
 {
-
-    public UIInventaryItem potionSO;
-
-    void Awake()
-    {
-       
-    }
+    public static Action<UIInventaryItemSO> setItem;
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Someone is trying to buy me");
         if (collision.TryGetComponent(out Player obj))
         {
-            UIInventary.instance.AddItem(potionSO);
+            setItem.Invoke(this.itemSO);
         }
     }
+
 
 }
 
