@@ -36,8 +36,9 @@ public class UIInventary : MonoBehaviour
             }
             _Inventory.Add(item);
            
-            if (!therIsOne) CreateMenuInventari.instance.InstatiateElement(item);
-            else CreateMenuInventari.instance.UpdateELements();
+            //if (!therIsOne) CreateMenuInventari.instance.InstatiateElement(item);
+            //else
+            CreateMenuInventari.instance.UpdateELements();
 
         }
     }

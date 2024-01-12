@@ -4,10 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ItemReference : MonoBehaviour
 {
     public Image Icon;
-    public Text CountText;
+    public TMP_Text CountText;
 
     public UIInventaryItemSO Item { get; private set; }
 
@@ -19,6 +20,8 @@ public class ItemReference : MonoBehaviour
     }
     public void UpdateCount()
     {
-       CountText.text="x"+ Item.Count.ToString();
+        var num = Item.Count;
+       CountText.text="x"+ num;
+        Debug.Log(CountText.text);
     }
 }

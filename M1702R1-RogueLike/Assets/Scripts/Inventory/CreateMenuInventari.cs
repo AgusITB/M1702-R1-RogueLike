@@ -29,17 +29,17 @@ public class CreateMenuInventari : MonoBehaviour
     {
         _inventory = new List<UIInventaryItemSO>();
         _inventory = FindObjectOfType<UIInventary>()._Inventory;
-        InstantiateElements();
+      //  InstantiateElements();
     }
-    private void InstantiateElements()
-    {
-        for (int i = 0; i < _inventory.Count; i++)
-        {
-            if (IsRepeated(i))
-                continue;
-            (Instantiate(_element, transform) as ItemReference).SetValues(_inventory[i]);
-        }
-    }
+    //private void InstantiateElements()
+    //{
+    //    for (int i = 0; i < _inventory.Count; i++)
+    //    {
+    //        if (IsRepeated(i))
+    //            continue;
+    //        (Instantiate(_element, transform) as ItemReference).SetValues(_inventory[i]);
+    //    }
+    //}
     public void UpdateELements()
     {
         for (int i = 0; i < _inventory.Count; i++)
