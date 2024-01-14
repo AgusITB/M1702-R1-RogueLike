@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class MouseSensitive : MonoBehaviour, IPointerClickHandler,IPointerEnterH
 {
     public static event System.Action<string, string> MouseOn;
     public static event System.Action MouseOff;
+
+    public static Action<ItemSO> onCLick;
+
 
     private ItemReference reference;
     // Start is called before the first frame update
@@ -21,7 +25,7 @@ public class MouseSensitive : MonoBehaviour, IPointerClickHandler,IPointerEnterH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Hola");
+        onCLick?.Invoke(reference.Item);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

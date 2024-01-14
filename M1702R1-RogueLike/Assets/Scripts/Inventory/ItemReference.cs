@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,18 +9,18 @@ public class ItemReference : MonoBehaviour
     public Image Icon;
     public TMP_Text CountText;
 
-    public UIInventaryItemSO Item { get; private set; }
+    public ItemSO Item;
 
-    public void SetValues(UIInventaryItemSO item)
-    {
-        Item = item;
-        Icon.sprite= item.Icon;
-        UpdateCount();
-    }
-    public void UpdateCount()
+    public static Action emptyReference;
+
+    public void SetValues()
     {
         var num = Item.Count;
-       CountText.text="x"+ num;
-        Debug.Log(CountText.text);
+        CountText.text = "x" + num;
+    }
+    public void SetEmpty()
+    {
+        var num = 0;
+        CountText.text = "x" + num;
     }
 }

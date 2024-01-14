@@ -4,21 +4,10 @@ using UnityEngine;
 
 public class CreateMenuInventari : MonoBehaviour
 {
-    public ItemReference _element;
-    [SerializeField] private List<UIInventaryItemSO> _inventory;
+    public List<ItemReference> _elements;
+    [SerializeField] private List<ItemSO> _inventory;
 
     public static CreateMenuInventari instance;
-
-
-    private void OnEnable()
-    {
-        InventoryToggle.openInventory += UpdateELements; 
-    }
-
-    private void OnDisable()
-    {
-        InventoryToggle.openInventory -= UpdateELements;
-    }
 
     private void Awake()
     {
@@ -27,39 +16,22 @@ public class CreateMenuInventari : MonoBehaviour
     }
     void Start()
     {
-        _inventory = new List<UIInventaryItemSO>();
+        _inventory = new List<ItemSO>();
         _inventory = FindObjectOfType<UIInventary>()._Inventory;
-      //  InstantiateElements();
     }
-    //private void InstantiateElements()
-    //{
-    //    for (int i = 0; i < _inventory.Count; i++)
-    //    {
-    //        if (IsRepeated(i))
-    //            continue;
-    //        (Instantiate(_element, transform) as ItemReference).SetValues(_inventory[i]);
-    //    }
-    //}
     public void UpdateELements()
     {
-        for (int i = 0; i < _inventory.Count; i++)
+        if (_inventory.Count == 0)
         {
-            (_element as ItemReference).SetValues(_inventory[i]);
+            foreach (ItemReference item in _elements)
+            {
+                item.SetEmpty();
+
+            }
+        }
+        for (int i = 0; i < _elements.Count; i++)
+        {
+            _elements[i].SetValues();
         }
     }
-    public void InstatiateElement(UIInventaryItemSO item)
-    {
-        (Instantiate(_element, transform) as ItemReference).SetValues(item);
-    }
-
-    bool IsRepeated(int i)
-    {
-        if (i == 0)
-        {
-            return false;
-        }
-        return _inventory[i].ID == _inventory[i - 1].ID;
-    }
-
-
 }

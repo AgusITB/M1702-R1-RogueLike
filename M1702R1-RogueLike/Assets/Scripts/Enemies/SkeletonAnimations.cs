@@ -19,15 +19,9 @@ public class SkeletonAnimations : MonoBehaviour
 
     private void Update()
     {
-
-        Vector3 vec = Unit.instance.currentWaypoint;
-
-
-        Vector3 dir = (this.transform.position - vec).normalized;
-
-        enemyAnimator.SetFloat("directionMagnitude",dir.magnitude);
-        enemyAnimator.SetFloat("DirectionX", dir.x);
-        enemyAnimator.SetFloat("DirectionY", dir.y);
+        //enemyAnimator.SetFloat("directionMagnitude",dir.magnitude);
+        //enemyAnimator.SetFloat("DirectionX", dir.x);
+        //enemyAnimator.SetFloat("DirectionY", dir.y);
     }
 
 

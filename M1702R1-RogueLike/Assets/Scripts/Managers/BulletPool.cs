@@ -7,7 +7,7 @@ public class BulletPool : MonoBehaviour
     public static BulletPool Instance;
     public EnergyBall bulletprefab;
     private int bulletsize = 5;
-    private List<EnergyBall> bullets= new List<EnergyBall>();
+    private List<EnergyBall> bullets= new();
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,7 +23,7 @@ public class BulletPool : MonoBehaviour
       
         for (int i = 0; i < bulletsize; i++)
         {
-            EnergyBall bullet = Instantiate(bulletprefab);
+            EnergyBall bullet = Instantiate(bulletprefab,this.transform);
             bullet.gameObject.SetActive(false);
             bullets.Add(bullet);
         }

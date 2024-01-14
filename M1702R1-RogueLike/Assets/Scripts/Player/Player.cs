@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class Player : Character, IDamagable, ICollector
 {
-
+    public static Player Instance;
     public int Money { get; set; }
 
     private EnemyHealthBar healthBar;
@@ -22,8 +22,13 @@ public class Player : Character, IDamagable, ICollector
     //private PlayerAnimation playerAnimation;
     //private PlayerMovement playerMovement;
 
+
+    public static Action<ItemSO> setItem;
+
     private void Awake()
     {
+        if (Instance != null && Instance != this) Destroy(this);
+        else Instance = this;
         maxHp = 100;
         Money = 100;
         currentHp = maxHp;
@@ -34,7 +39,7 @@ public class Player : Character, IDamagable, ICollector
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           TakeDamage(25);
+            TakeDamage(25);
         }
     }
     public void AnimateHit()
@@ -52,50 +57,43 @@ public class Player : Character, IDamagable, ICollector
         currentHp -= damage;
         if (currentHp <= 0) currentHp = 0;
 
-        Debug.Log($"I took damage, my hp is :{currentHp}");
+      //  Debug.Log($"I took damage, my hp is :{currentHp}");
 
         healthBar.UpdateHealthBar(currentHp, maxHp);
 
         if (currentHp <= 0) Die();
-
+    }
+    public void UpgradeSlash(int damageAmount)
+    {
+        Slash.Instance.UpgradeDamage(damageAmount); 
+    }
+    public void HealHp(int hp)
+    {
+        if (currentHp+hp > maxHp) currentHp = maxHp;
+        else currentHp += hp;
+        healthBar.UpdateHealthBar(currentHp, maxHp);
     }
     public void AddMaxHP(int hpValue)
     {
-        if (maxHp + hpValue > 50)
-        {
-            return;
-        }
+        if (maxHp + hpValue > 50) return;
         else maxHp += hpValue;
         Debug.Log(maxHp);
     }
-    public void BuyItem(int value, ShopItem item)
-    {
-
-        if (item is IConsumable consumable)
-        {
-            consumable.ConsumeItem(this);
-            Money -= value;
-            item.gameObject.SetActive(false);
-        }
-        else
-        {
-            throw new NotImplementedException();
-        // L�gica para reducir la salud del jugador
-        }
+    public void TakeItem(ItemSO itemInfo, Item item)
+    {    
+        if (item.TryGetComponent(out ICollectable collectable)) collectable.CollectItem(this, item);
+        else setItem.Invoke(itemInfo);
     }
-
-    public void TakeItem(int value)
+    public void TakeCoin(int value)
     {
-        Debug.Log("Moneda sumada");
         totalCoins += value;
-        Debug.Log("Recogidas " + value + " puntos. Total: " + totalCoins + " monedas ");
         UpdateCoinsText(totalCoins);
     }
     private void UpdateCoinsText(int value)
     {
         if (coinsText != null)
         {
-            coinsText.text = " + " + value.ToString();
+            coinsText.text = "Monedas: " + value.ToString();
         }
     }
 }

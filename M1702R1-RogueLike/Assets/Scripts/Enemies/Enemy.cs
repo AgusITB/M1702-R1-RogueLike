@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : Character, IDamagable
@@ -11,14 +9,13 @@ public class Enemy : Character, IDamagable
     Color defaultColor;
     Animator enemyAnimator;
     Color dieColor;
+    bool isDying;
 
-    CircleCollider2D rangeCollider;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
         enemyAnimator = GetComponent<Animator>();
-        rangeCollider = GetComponent<CircleCollider2D>();   
 
         dieColor = defaultColor;
         maxHp = 15;
@@ -29,18 +26,13 @@ public class Enemy : Character, IDamagable
  
     public void TakeDamage(int damage)
     {
+        if (isDying) return;
         currentHp -= damage;
-        if (currentHp <= 0) currentHp = 0;
-
-        Debug.Log($"I took damage, my hp is :{currentHp}");
+        if (currentHp <= 0) currentHp = 0;  
 
         healthBar.UpdateHealthBar(currentHp, maxHp);
 
-        if (currentHp <= 0) 
-        {
-            Die();
-            
-        }
+        if (currentHp <= 0) Die();
 
     }
     public void AnimateHit()
@@ -51,6 +43,7 @@ public class Enemy : Character, IDamagable
     }
     public void Die()
     {
+        isDying = true;
         StopAllCoroutines(); // Detener todas las coroutines activas
         enemyAnimator.SetBool("isDead", true);
         dieColor.a = 0;
