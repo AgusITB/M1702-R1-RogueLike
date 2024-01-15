@@ -15,4 +15,4 @@ MonoBehaviour:
   Icon: {fileID: -1910564737, guid: 597d15ea4950d764fa36a04f9bb589ea, type: 3}
   Name: Coin
   Description: UN EURO
-  value: 1
+  value: 5

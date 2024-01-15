@@ -15,5 +15,6 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 1b5cd5f8cf4508e4c9286694af100e51, type: 2}
   Name: Lvl1 Potion
   Description: Heals for 20 hp
-  value: 0
+  value: 3
+  price: 3
   healingAmount: 20

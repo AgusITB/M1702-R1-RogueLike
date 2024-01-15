@@ -8,7 +8,12 @@ public class Item : MonoBehaviour
     {
         if (other.TryGetComponent(out ICollector obj))
         {
-            obj.TakeItem(itemSO, this);
+
+            if (obj.CanBuy(itemSO.price))
+            {
+                obj.TakeItem(itemSO, this);
+                Destroy(gameObject);
+            }
         }
     }
 }

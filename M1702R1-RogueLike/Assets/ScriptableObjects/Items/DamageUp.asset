@@ -15,4 +15,6 @@ MonoBehaviour:
   Icon: {fileID: -934343920, guid: 760e0199627baab4b890428cfaeae96b, type: 3}
   Name: DamageUp
   Description: Sword that gives the slash 5 more damage
+  value: 15
+  price: 15
   damageAmount: 5

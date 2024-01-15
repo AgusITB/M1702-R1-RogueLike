@@ -80,9 +80,21 @@ public class Player : Character, IDamagable, ICollector
         Debug.Log(maxHp);
     }
     public void TakeItem(ItemSO itemInfo, Item item)
-    {    
-        if (item.TryGetComponent(out ICollectable collectable)) collectable.CollectItem(this, item);
-        else setItem.Invoke(itemInfo);
+    {
+        if (item.TryGetComponent(out ICollectable collectable))
+        {
+            collectable.CollectItem(this, item);
+        }
+        else
+        {
+            totalCoins -= itemInfo.value;
+            UpdateCoinsText(totalCoins);
+            setItem.Invoke(itemInfo);
+        }
+    }
+    public bool CanBuy(int price)
+    {
+        return totalCoins >= price;
     }
     public void TakeCoin(int value)
     {

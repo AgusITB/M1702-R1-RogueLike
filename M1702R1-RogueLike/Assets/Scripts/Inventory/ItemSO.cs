@@ -10,7 +10,7 @@ public abstract class ItemSO : ScriptableObject
     public string Description;
     public int value;
     public static Action<ItemSO> consumeItem;
-
+    public int price;
 
     public int ID { get; private set; }
 
