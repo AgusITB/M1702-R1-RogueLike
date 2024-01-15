@@ -57,14 +57,9 @@ public class CanvasManager : MonoBehaviour
         tutorial2.SetActive(true);
         Time.timeScale = 1f;
     }
-    public void ButtonVolver()
-    {
-        tutorial1.SetActive(true);
-        tutorial2.SetActive(false);
-        Time.timeScale = 1f;
-    }
     public void Game()
     {
+        Debug.Log("HOLA");
         startMenu.SetActive(false);
         tutorial1.SetActive(false);
         tutorial2.SetActive(false);
