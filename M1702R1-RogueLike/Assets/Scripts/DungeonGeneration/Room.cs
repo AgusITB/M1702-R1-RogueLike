@@ -30,8 +30,6 @@ public class Room : MonoBehaviour
         return Math.Sqrt(x * x + y * y);
     }
 
-
-
     private void Update()
     {
         if (name.Contains("End") && !updatedDoors)
@@ -70,9 +68,16 @@ public class Room : MonoBehaviour
         }
         RoomController.instance.RegisterRoom(this);
         distance = DistanceFromOrigin(X, Y);
+        if(name.Contains("Empty")) InstantiateEnemies();
+
     }
 
-
+    private void InstantiateEnemies()
+    {
+        System.Random rand = new System.Random();
+        int room = rand.Next(0, RoomController.instance.RoomsSO.roomPrefabs.Count);
+        Instantiate(RoomController.instance.RoomsSO.roomPrefabs[room],this.gameObject.transform);
+    }
     public void RemoveUnconnectedDoors()
     {
         foreach (Door door in doors)

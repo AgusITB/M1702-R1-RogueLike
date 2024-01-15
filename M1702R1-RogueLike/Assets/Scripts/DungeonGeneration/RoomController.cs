@@ -27,6 +27,7 @@ public class RoomController : MonoBehaviour
     private readonly float movePlayerDistance = 5f;
     public static RoomController instance;
 
+    public RoomPrefabsSO RoomsSO;
     readonly string currentWorldName = "Basement";
 
     RoomInfo currentLoadRoomData;

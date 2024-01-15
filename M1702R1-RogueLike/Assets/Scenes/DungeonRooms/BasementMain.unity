@@ -1654,6 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468e9b4f3e3f1f3469f843aa0613bfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoomsSO: {fileID: 11400000, guid: 4902186edbc8fd34298fb39891f70355, type: 2}
   loadedRooms: []
 --- !u!114 &630528765
 MonoBehaviour:

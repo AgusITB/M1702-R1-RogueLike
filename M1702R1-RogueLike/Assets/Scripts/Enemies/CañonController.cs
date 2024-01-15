@@ -24,7 +24,7 @@ public class CañonController : Ability
 
         //Debug.Log(distance);
 
-        if(distance < 10)
+        if(distance < 4)
         {
             RotateTowards();
             Attack();
