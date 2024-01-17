@@ -45,6 +45,10 @@ public class RoomController : MonoBehaviour
 
     Player player;
 
+    public Room currentRoom;
+
+    public static Action<Room> wakeEnemiesOnThisRoom;
+
     void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -168,7 +172,7 @@ public class RoomController : MonoBehaviour
 
             if (loadedRooms.Count == 0)
             {
-                CameraController.instance.currentRoom = room;
+                CameraController.Instance.currentRoom = room;
             }
 
             loadedRooms.Add(room);
@@ -192,18 +196,23 @@ public class RoomController : MonoBehaviour
     }
     public void OnPlayerEnterRoom(Room room)
     {
-        if (CameraController.instance.currentRoom.X > room.X)
+        if (CameraController.Instance.currentRoom.X > room.X)
             player.transform.position = new Vector3(player.transform.position.x - movePlayerDistance, player.transform.position.y);
-        else if (CameraController.instance.currentRoom.X < room.X)
+        else if (CameraController.Instance.currentRoom.X < room.X)
             player.transform.position = new Vector3(player.transform.position.x + movePlayerDistance, player.transform.position.y);
-        else if (CameraController.instance.currentRoom.Y > room.Y)
+        else if (CameraController.Instance.currentRoom.Y > room.Y)
             player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - movePlayerDistance);
-        else if (CameraController.instance.currentRoom.Y < room.Y)
+        else if (CameraController.Instance.currentRoom.Y < room.Y)
             player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + movePlayerDistance);
 
-        CameraController.instance.currentRoom = room;
-        // currentRoom = room;
+        CameraController.Instance.currentRoom = room;
+        StartCoroutine(Wait(room));
 
     }
-
+    IEnumerator Wait(Room room)
+    {
+        yield return new WaitForSeconds(1f);
+        currentRoom = room;
+        wakeEnemiesOnThisRoom.Invoke(room);
+    }
 }

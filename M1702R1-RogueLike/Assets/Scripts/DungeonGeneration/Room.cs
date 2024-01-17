@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -70,9 +72,18 @@ public class Room : MonoBehaviour
         }
         RoomController.instance.RegisterRoom(this);
         distance = DistanceFromOrigin(X, Y);
+        GetEnemiesRoom();
     }
 
 
+    public void GetEnemiesRoom()
+    {
+        Enemy[] enemies = GetComponentsInChildren<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.SetCurrentRoom(this);
+        }
+    }
     public void RemoveUnconnectedDoors()
     {
         foreach (Door door in doors)

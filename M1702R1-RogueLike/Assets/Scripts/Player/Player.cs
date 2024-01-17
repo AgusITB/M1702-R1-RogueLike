@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class Player : Character, IDamagable, ICollector
 {
-
+    public static Player Instance;
     public int Money { get; set; }
 
     private EnemyHealthBar healthBar;
@@ -24,6 +24,14 @@ public class Player : Character, IDamagable, ICollector
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
         maxHp = 100;
         Money = 100;
         currentHp = maxHp;

@@ -405,7 +405,6 @@ GameObject:
   - component: {fileID: 4177946360450753766}
   - component: {fileID: 6009155430570115471}
   - component: {fileID: 6253213795787801722}
-  - component: {fileID: 1146439693886316824}
   - component: {fileID: 4587156432863406883}
   m_Layer: 0
   m_Name: Skeleton 1
@@ -588,21 +587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monedaPrefab: {fileID: 8444050153319961925, guid: 7c77f06702a654d48865ddf4cfe26cc4, type: 3}
---- !u!114 &1146439693886316824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9123327404721219002}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6969e6c443fdee643b5938834bb26256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  speed: 3
-  currentWaypoint: {x: 0, y: 0}
 --- !u!114 &4587156432863406883
 MonoBehaviour:
   m_ObjectHideFlags: 0

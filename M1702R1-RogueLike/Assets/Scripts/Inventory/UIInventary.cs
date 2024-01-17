@@ -27,17 +27,8 @@ public class UIInventary : MonoBehaviour
     public void AddItem(UIInventaryItemSO item)
     {
         if (item != null)
-        {
-            bool therIsOne = false;
-
-            foreach (var item2 in _Inventory)
-            {
-                if (item2.name == item.name) therIsOne = true;
-            }
-            _Inventory.Add(item);
-           
-            //if (!therIsOne) CreateMenuInventari.instance.InstatiateElement(item);
-            //else
+        {       
+            _Inventory.Add(item);    
             CreateMenuInventari.instance.UpdateELements();
 
         }

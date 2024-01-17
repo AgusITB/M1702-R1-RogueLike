@@ -7,29 +7,21 @@ using static UnityEditor.PlayerSettings;
 public class SkeletonAnimations : MonoBehaviour
 {
     Animator enemyAnimator;
-    Unit me;
-    SpriteRenderer spRenderer;
+
 
     private void Awake()
     {
-        spRenderer = GetComponent<SpriteRenderer>();
-        me = GetComponent<Unit>();
+
         enemyAnimator = GetComponent<Animator>();
     }
 
-    private void Update()
+
+    public void AnimateMovement(Vector3 dir)
     {
-
-        Vector3 vec = Unit.instance.currentWaypoint;
-
-
-        Vector3 dir = (this.transform.position - vec).normalized;
-
-        enemyAnimator.SetFloat("directionMagnitude",dir.magnitude);
+        dir = dir.normalized;
+        enemyAnimator.SetFloat("directionMagnitude", dir.magnitude);
         enemyAnimator.SetFloat("DirectionX", dir.x);
         enemyAnimator.SetFloat("DirectionY", dir.y);
     }
-
-
 
 }

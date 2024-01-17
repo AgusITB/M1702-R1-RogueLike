@@ -6,16 +6,20 @@ using UnityEngine.InputSystem.XR.Haptics;
 public class CameraController : MonoBehaviour
 {
 
-    public static CameraController instance;
+    public static CameraController Instance;
 
     public Room currentRoom;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != null)
+        if (Instance != null && Instance != this)
+        {
             Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
     public float moveSpeedWhenRoomChange;
 

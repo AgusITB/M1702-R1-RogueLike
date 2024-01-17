@@ -11,24 +11,77 @@ public class Enemy : Character, IDamagable
     Color defaultColor;
     Animator enemyAnimator;
     Color dieColor;
+    bool isDead = false;
+
+
+    SkeletonAnimations skeletonAnimations;
 
     CircleCollider2D rangeCollider;
+
+    bool playerIsInSameRoom;
+    public Room currentRoom;
+    private Transform target;
+
+    private void OnEnable()
+    {
+        RoomController.wakeEnemiesOnThisRoom += ChasePlayer;
+    }
+    private void OnDisable()
+    {
+        RoomController.wakeEnemiesOnThisRoom -= ChasePlayer;
+
+    }
+   
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
         enemyAnimator = GetComponent<Animator>();
-        rangeCollider = GetComponent<CircleCollider2D>();   
+        rangeCollider = GetComponent<CircleCollider2D>();
+        skeletonAnimations = GetComponentInChildren<SkeletonAnimations>();  
 
         dieColor = defaultColor;
         maxHp = 15;
-        speed = 2;
+        speed = 5;
         currentHp = maxHp;
         defaultColor = spriteRenderer.color;
     }
- 
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();  
+    }
+
+    private void ChasePlayer(Room currentRoom)
+    {
+        if (RoomController.instance.currentRoom == this.currentRoom)
+        {
+            playerIsInSameRoom = true;
+
+        }
+        else
+        {
+            playerIsInSameRoom = false;
+            skeletonAnimations.AnimateMovement(new Vector3 (0,0,0));
+        }
+    }
+
+    private void Update()
+    {
+        if (playerIsInSameRoom & currentHp > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            skeletonAnimations.AnimateMovement(transform.position-target.position);
+        }
+
+    }
+
+    public void SetCurrentRoom(Room room)
+    {
+        currentRoom = room;
+    }
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
         currentHp -= damage;
         if (currentHp <= 0) currentHp = 0;
 
@@ -51,8 +104,9 @@ public class Enemy : Character, IDamagable
     }
     public void Die()
     {
+        isDead = true;
         StopAllCoroutines(); // Detener todas las coroutines activas
-        enemyAnimator.SetBool("isDead", true);
+        enemyAnimator.SetBool("isDead", isDead);
         dieColor.a = 0;
 
         Instantiate(monedaPrefab, transform.position, Quaternion.identity);
