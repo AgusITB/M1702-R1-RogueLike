@@ -22,6 +22,9 @@ public class Player : Character, IDamagable, ICollector
     //private PlayerAnimation playerAnimation;
     //private PlayerMovement playerMovement;
 
+
+    public static Action<ItemSO> setItem;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -42,7 +45,7 @@ public class Player : Character, IDamagable, ICollector
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           TakeDamage(25);
+            TakeDamage(25);
         }
     }
     public void AnimateHit()
@@ -60,50 +63,55 @@ public class Player : Character, IDamagable, ICollector
         currentHp -= damage;
         if (currentHp <= 0) currentHp = 0;
 
-        Debug.Log($"I took damage, my hp is :{currentHp}");
+      //  Debug.Log($"I took damage, my hp is :{currentHp}");
 
         healthBar.UpdateHealthBar(currentHp, maxHp);
 
         if (currentHp <= 0) Die();
-
+    }
+    public void UpgradeSlash(int damageAmount)
+    {
+        Slash.Instance.UpgradeDamage(damageAmount); 
+    }
+    public void HealHp(int hp)
+    {
+        if (currentHp+hp > maxHp) currentHp = maxHp;
+        else currentHp += hp;
+        healthBar.UpdateHealthBar(currentHp, maxHp);
     }
     public void AddMaxHP(int hpValue)
     {
-        if (maxHp + hpValue > 50)
-        {
-            return;
-        }
+        if (maxHp + hpValue > 50) return;
         else maxHp += hpValue;
         Debug.Log(maxHp);
     }
-    public void BuyItem(int value, ShopItem item)
+    public void TakeItem(ItemSO itemInfo, Item item)
     {
-
-        if (item is IConsumable consumable)
+        if (item.TryGetComponent(out ICollectable collectable))
         {
-            consumable.ConsumeItem(this);
-            Money -= value;
-            item.gameObject.SetActive(false);
+            collectable.CollectItem(this, item);
         }
         else
         {
-            throw new NotImplementedException();
-        // L�gica para reducir la salud del jugador
+            totalCoins -= itemInfo.value;
+            UpdateCoinsText(totalCoins);
+            setItem.Invoke(itemInfo);
         }
     }
-
-    public void TakeItem(int value)
+    public bool CanBuy(int price)
     {
-        Debug.Log("Moneda sumada");
+        return totalCoins >= price;
+    }
+    public void TakeCoin(int value)
+    {
         totalCoins += value;
-        Debug.Log("Recogidas " + value + " puntos. Total: " + totalCoins + " monedas ");
         UpdateCoinsText(totalCoins);
     }
     private void UpdateCoinsText(int value)
     {
         if (coinsText != null)
         {
-            coinsText.text = " + " + value.ToString();
+            coinsText.text = "Monedas: " + value.ToString();
         }
     }
 }

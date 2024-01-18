@@ -5,9 +5,19 @@ using UnityEngine;
 public class Slash : MonoBehaviour
 {
 
-    public int damage = 5;
+    private int damage = 5;
     public int valor = 2;
+    public static Slash Instance;
 
+    private void Awake()
+    {
+     
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else Instance = this;
+    }
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out IDamagable obj))
@@ -23,6 +33,10 @@ public class Slash : MonoBehaviour
 
         this.gameObject.SetActive(false);
 
+    }
+    public void UpgradeDamage(int damage)
+    {
+        this.damage += damage;
     }
 
 }

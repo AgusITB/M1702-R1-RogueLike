@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 public interface ICollectable
 {
-    public void CollectItem();
+    public void CollectItem(ICollector collector, Item item);
 }

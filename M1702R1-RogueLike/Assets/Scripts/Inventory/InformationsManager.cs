@@ -11,6 +11,7 @@ public class InformationsManager : MonoBehaviour
     {
         MouseSensitive.MouseOn += ShowInformations;
         MouseSensitive.MouseOff += ResetInformations;
+        ItemReference.emptyReference += ResetInformations;
 
     }
     private void OnDestroy()

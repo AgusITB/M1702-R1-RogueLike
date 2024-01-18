@@ -8,37 +8,38 @@ using UnityEngine;
 public class UIInventary : MonoBehaviour
 {
 
-    public List<UIInventaryItemSO> _Inventory;
-
-
+    public List<ItemSO> _Inventory;
+    
     private void OnEnable()
     {
-        HealingPotion.setItem += AddItem;
+        Player.setItem += AddItem;
+        ItemSO.consumeItem += RemoveItem;
     }
     private void OnDisable()
     {
-        HealingPotion.setItem -= AddItem;
+        Player.setItem -= AddItem;
+        ItemSO.consumeItem -= RemoveItem;
     }
 
     private void Awake()
     {
-        _Inventory = new List<UIInventaryItemSO>();
+        _Inventory = new List<ItemSO>();
     }
-    public void AddItem(UIInventaryItemSO item)
+    public void AddItem(ItemSO item)
     {
         if (item != null)
         {       
             _Inventory.Add(item);    
             CreateMenuInventari.instance.UpdateELements();
-
         }
     }
-    public void RemoveItem(UIInventaryItemSO item)
+    public void RemoveItem(ItemSO item)
     {
         if (item != null)
         {
             _Inventory.Remove(item);
-
+            CreateMenuInventari.instance.UpdateELements();
         }
-    }
+    }  
+
 }

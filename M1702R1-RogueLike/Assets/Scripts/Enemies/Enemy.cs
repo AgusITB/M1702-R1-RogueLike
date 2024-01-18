@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : Character, IDamagable
@@ -31,7 +29,6 @@ public class Enemy : Character, IDamagable
         RoomController.wakeEnemiesOnThisRoom -= ChasePlayer;
 
     }
-   
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,7 +36,6 @@ public class Enemy : Character, IDamagable
         enemyAnimator = GetComponent<Animator>();
         rangeCollider = GetComponent<CircleCollider2D>();
         skeletonAnimations = GetComponentInChildren<SkeletonAnimations>();  
-
         dieColor = defaultColor;
         maxHp = 15;
         speed = 5;
@@ -82,18 +78,13 @@ public class Enemy : Character, IDamagable
     public void TakeDamage(int damage)
     {
         if (isDead) return;
-        currentHp -= damage;
-        if (currentHp <= 0) currentHp = 0;
 
-        Debug.Log($"I took damage, my hp is :{currentHp}");
+        currentHp -= damage;
+        if (currentHp <= 0) currentHp = 0;  
 
         healthBar.UpdateHealthBar(currentHp, maxHp);
 
-        if (currentHp <= 0) 
-        {
-            Die();
-            
-        }
+        if (currentHp <= 0) Die();
 
     }
     public void AnimateHit()
