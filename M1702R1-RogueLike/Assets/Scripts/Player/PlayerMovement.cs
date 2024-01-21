@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.InputSystem;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 rangeDirection;
 
 
-    private int speed = 10;
+    private int speed = 15;
 
 
     private void Awake()
@@ -47,10 +43,5 @@ public class PlayerMovement : MonoBehaviour
         pAnimation.AnimateMovement(direction,lastDirection);
 
     }
-
-
-
-
-
 
 }

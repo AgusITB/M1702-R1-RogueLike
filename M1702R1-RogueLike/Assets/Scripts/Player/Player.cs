@@ -8,25 +8,22 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Player : Character, IDamagable, ICollector
+public class Player : Character, ICollector
 {
     public static Player Instance;
     public int Money { get; set; }
 
-    private EnemyHealthBar healthBar;
-
     public Text coinsText;
     private int totalCoins = 0;
 
-    //private PlayerInputs playerinput;
-    //private PlayerAnimation playerAnimation;
-    //private PlayerMovement playerMovement;
-
-
     public static Action<ItemSO> setItem;
 
-    private void Awake()
+    public GameObject gotHitScreen;
+
+
+    protected override void Awake()
     {
+        base.Awake();
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -39,35 +36,6 @@ public class Player : Character, IDamagable, ICollector
         Money = 100;
         currentHp = maxHp;
         healthBar = GameObject.FindGameObjectWithTag("playerHealthBar").GetComponent<EnemyHealthBar>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(25);
-        }
-    }
-    public void AnimateHit()
-    {
-        // L�gica de animaci�n de golpe
-    }
-
-    public void Die()
-    {
-        // L�gica de muerte del jugador
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHp -= damage;
-        if (currentHp <= 0) currentHp = 0;
-
-      //  Debug.Log($"I took damage, my hp is :{currentHp}");
-
-        healthBar.UpdateHealthBar(currentHp, maxHp);
-
-        if (currentHp <= 0) Die();
     }
     public void UpgradeSlash(int damageAmount)
     {
@@ -114,4 +82,21 @@ public class Player : Character, IDamagable, ICollector
             coinsText.text = "Monedas: " + value.ToString();
         }
     }
+
+    public override void AnimateHit()
+    {
+        StopCoroutine(FlashScreen());
+        base.AnimateHit();
+        StartCoroutine(FlashScreen());
+    }
+    private IEnumerator FlashScreen()
+    {
+        var color = gotHitScreen.GetComponent<Image>().color;
+        color.a = 0.3f;
+        gotHitScreen.GetComponent<Image>().color = color;
+        yield return new WaitForSeconds(0.2f);
+        color.a = 0f;
+        gotHitScreen.GetComponent<Image>().color = color;
+    }
+
 }
