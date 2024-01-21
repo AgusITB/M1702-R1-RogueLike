@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class EnemyBulletCañon : MonoBehaviour
+public class CannonBullet : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
     private float force=5f;
 
-    public static EnemyBulletCañon instance;
+    private int damage = 5;
+    public static CannonBullet instance;
 
 
     // Start is called before the first frame update
@@ -18,9 +19,6 @@ public class EnemyBulletCañon : MonoBehaviour
         instance = this;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-
-
-
     }
 
     // Update is called once per frame
@@ -37,6 +35,15 @@ public class EnemyBulletCañon : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
+        }
+        else if (other.TryGetComponent(out IDamagable obj))
+        {
+            if (obj is Player)
+            {
+                obj.AnimateHit();
+                obj.TakeDamage(damage);
+            }
+           
         }
     }
 }

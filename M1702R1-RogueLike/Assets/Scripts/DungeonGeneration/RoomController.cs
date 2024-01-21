@@ -205,14 +205,15 @@ public class RoomController : MonoBehaviour
             player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - movePlayerDistance);
         else if (CameraController.Instance.currentRoom.Y < room.Y)
             player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + movePlayerDistance);
-
+        
+       
         CameraController.Instance.currentRoom = room;
         StartCoroutine(Wait(room));
 
     }
     IEnumerator Wait(Room room)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         currentRoom = room;
         wakeEnemiesOnThisRoom.Invoke(room);
     }

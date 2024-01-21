@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -24,6 +20,18 @@ public class Room : MonoBehaviour
 
     public double distance = double.MinValue;
     public bool visited = false;
+
+    private List<Enemy> enemies = new();
+
+
+    private void OnEnable()
+    {
+        Enemy.die += RemoveDeadEnemies;
+    }
+    private void OnDisable()
+    {
+        Enemy.die -= RemoveDeadEnemies;
+    }
 
     private double DistanceFromOrigin(int X, int Y)
     {
@@ -70,26 +78,30 @@ public class Room : MonoBehaviour
         }
         RoomController.instance.RegisterRoom(this);
         distance = DistanceFromOrigin(X, Y);
+        if (name.Contains("Empty")) InstantiateEnemies();
         GetEnemiesRoom();
     }
 
 
     public void GetEnemiesRoom()
     {
-        Enemy[] enemies = GetComponentsInChildren<Enemy>();
-        foreach (Enemy enemy in enemies)
+        Enemy[] fakeenemies = this.gameObject.GetComponentsInChildren<Enemy>();
+
+        foreach (Enemy enemy in fakeenemies)
         {
+            this.enemies.Add(enemy);
             enemy.SetCurrentRoom(this);
         }
-        if(name.Contains("Empty")) InstantiateEnemies();
-
     }
-
+    public void RemoveDeadEnemies(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+    }
     private void InstantiateEnemies()
     {
         System.Random rand = new System.Random();
         int room = rand.Next(0, RoomController.instance.RoomsSO.roomPrefabs.Count);
-        Instantiate(RoomController.instance.RoomsSO.roomPrefabs[room],this.gameObject.transform);
+        Instantiate(RoomController.instance.RoomsSO.roomPrefabs[room], this.gameObject.transform);
     }
     public void RemoveUnconnectedDoors()
     {
@@ -163,7 +175,8 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+     //   if (RoomController.instance.currentRoom == null)  return; 
+        if (other.CompareTag("Player") && CameraController.Instance.currentRoom.enemies.Count == 0)
         {
             RoomController.instance.OnPlayerEnterRoom(this);
         }
