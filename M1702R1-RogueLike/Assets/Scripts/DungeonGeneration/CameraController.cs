@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance;
 
     public Room currentRoom;
+    public Room lastRoom;
+
 
     private void Awake()
     {

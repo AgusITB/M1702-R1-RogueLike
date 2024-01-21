@@ -147,6 +147,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2572837697643531629, guid: d9295bbcd9d614840a66bb8c9e48a8c5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3548406216716143831, guid: d9295bbcd9d614840a66bb8c9e48a8c5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866214339494314761, guid: d9295bbcd9d614840a66bb8c9e48a8c5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4734069891991666144, guid: d9295bbcd9d614840a66bb8c9e48a8c5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -203,6 +215,14 @@ PrefabInstance:
       propertyPath: roomPrefab
       value: 
       objectReference: {fileID: 5694502372012939619, guid: 39ff93bd490806f41a6c4f7a5233354b, type: 3}
+    - target: {fileID: 7112429345079696996, guid: d9295bbcd9d614840a66bb8c9e48a8c5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710008160985471982, guid: d9295bbcd9d614840a66bb8c9e48a8c5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8148137568499217924, guid: d9295bbcd9d614840a66bb8c9e48a8c5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

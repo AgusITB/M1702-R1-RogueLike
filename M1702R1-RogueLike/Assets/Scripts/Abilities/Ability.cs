@@ -37,7 +37,6 @@ public abstract class Ability : MonoBehaviour
 
         if (abilityName == "MeleeAttack")
             playerControls.Gameplay.Attack.performed += Attack;
-
         if (abilityName == "RangeAttack")
             playerControls.Gameplay.RangeAttack.performed += Attack;
         if (abilityName == "FlameThrower")
