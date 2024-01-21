@@ -15,7 +15,9 @@ public class Skeleton : Enemy
     {
         base.Awake();
         skeletonAnimations = GetComponentInChildren<SkeletonAnimations>();
-
+        maxHp = 15;
+        currentHp = maxHp;
+        speed = 2;
     }
 
     private void Update()

@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementBossFinal : MonoBehaviour
+public class MovementBossFinal : Enemy
 {
-    public float speed = 5f; 
-
+    int damage = 15;
     private Vector2 movementDirection;
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        maxHp = 50;
+        currentHp = maxHp;
+        speed = 5;
+    }
+    void Start()
+    {   
         // Establecer una dirección de movimiento inicial aleatoria
         movementDirection = Random.insideUnitCircle.normalized;
     }
@@ -21,11 +27,19 @@ public class MovementBossFinal : MonoBehaviour
         transform.Translate(movement);
     }
     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
+    {      
         if (collision.gameObject.CompareTag("Wall"))
         {
             ReflectMovement(collision.contacts[0].normal);
+        }
+        else if (collision.gameObject.TryGetComponent(out IDamagable player))
+        {
+            if (player is Player)
+            {
+                player.AnimateHit();
+                player.TakeDamage(damage);
+            }
+
         }
     }
     void ReflectMovement(Vector2 normal)

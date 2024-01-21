@@ -176,7 +176,7 @@ public class Room : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
      //   if (RoomController.instance.currentRoom == null)  return; 
-        if (other.CompareTag("Player") && CameraController.Instance.currentRoom.enemies.Count == 0)
+        if (other.CompareTag("Player"))// && CameraController.Instance.currentRoom.enemies.Count == 0)
         {
             RoomController.instance.OnPlayerEnterRoom(this);
         }

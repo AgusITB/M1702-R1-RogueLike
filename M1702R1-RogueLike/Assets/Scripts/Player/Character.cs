@@ -24,9 +24,6 @@ public abstract class Character : MonoBehaviour, IDamagable
         healthBar = GetComponentInChildren<EnemyHealthBar>();
         enemyAnimator = GetComponent<Animator>();
         dieColor = defaultColor;
-        maxHp = 15;
-        speed = 3;
-        currentHp = maxHp;
         defaultColor = spriteRenderer.color;
     }
     public void TakeDamage(int damage)

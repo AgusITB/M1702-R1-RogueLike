@@ -28,15 +28,15 @@ public class PlayerInputs : MonoBehaviour
     }
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-
+        //if (Instance != null && Instance != this)
+        //{
+        //    Destroy(this);
+        //}
+        //else
+        //{
+        //    
+        //}
+        Instance = this;
         playerMovement = GetComponent<PlayerMovement>();
 
         playerControls = new PlayerControls();

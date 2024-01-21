@@ -53,7 +53,14 @@ public class RoomController : MonoBehaviour
     void Awake()
     {
         player = FindObjectOfType<Player>();
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
     private void Update()
     {
