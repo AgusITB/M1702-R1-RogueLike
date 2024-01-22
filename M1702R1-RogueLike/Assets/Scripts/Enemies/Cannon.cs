@@ -13,7 +13,7 @@ public class Cannon : Enemy
     }
     private void Update()
     {
-
+        if (target == null) { return; }
         float distance = Vector2.Distance(transform.position, target.transform.position);
 
         if (distance < 10 && !isDead && playerIsInSameRoom)
