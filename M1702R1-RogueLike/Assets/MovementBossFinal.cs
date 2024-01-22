@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementBossFinal : Enemy
 {
     int damage = 15;
     private Vector2 movementDirection;
-
+    public NextLevel nextLevel;
     protected override void Awake()
     {
         base.Awake();
+        nextLevel.gameObject.SetActive(false);
         maxHp = 50;
         currentHp = maxHp;
         speed = 5;
@@ -53,5 +52,10 @@ public class MovementBossFinal : Enemy
         Vector3 scale = transform.localScale;
         scale.x *= -1f;
         transform.localScale = scale;
+    }
+    public override void Die()
+    {
+        nextLevel.gameObject.SetActive(true);
+        base.Die();
     }
 }

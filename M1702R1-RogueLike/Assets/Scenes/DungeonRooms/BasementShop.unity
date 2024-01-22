@@ -7700,6 +7700,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 104305665}
     m_Modifications:
+    - target: {fileID: 1993600202920168550, guid: 0fc2a7a71169f6542bd7fb92d32e59fa, type: 3}
+      propertyPath: value
+      value: 
+      objectReference: {fileID: 2650874094875798624}
     - target: {fileID: 3003810981346019026, guid: 0fc2a7a71169f6542bd7fb92d32e59fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
@@ -7752,6 +7756,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 0fc2a7a71169f6542bd7fb92d32e59fa, type: 3}
+--- !u!1 &2650874094875798624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7701938474819713407, guid: 0fc2a7a71169f6542bd7fb92d32e59fa, type: 3}
+  m_PrefabInstance: {fileID: 2650874094875798623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6090469854563443424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7804,6 +7813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordItem
       objectReference: {fileID: 0}
+    - target: {fileID: 6015725193866781499, guid: 9c88d49d5b2ea75469b0258cc7a078e6, type: 3}
+      propertyPath: value
+      value: 
+      objectReference: {fileID: 6090469854563443425}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7812,6 +7825,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 9c88d49d5b2ea75469b0258cc7a078e6, type: 3}
+--- !u!1 &6090469854563443425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2896274250663339060, guid: 9c88d49d5b2ea75469b0258cc7a078e6, type: 3}
+  m_PrefabInstance: {fileID: 6090469854563443424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ TagManager:
   - Rooms
   - playerHealthBar
   - Moneda
+  - RoomController
+  - PortalParent
   layers:
   - Default
   - TransparentFX
