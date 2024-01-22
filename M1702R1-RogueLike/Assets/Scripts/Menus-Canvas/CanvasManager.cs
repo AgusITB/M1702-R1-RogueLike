@@ -43,6 +43,7 @@ public class CanvasManager : MonoBehaviour
 
     public void DisableStart()
     {
+        Debug.Log("HOLA");
         startMenu.SetActive(false);
         tutorial1.SetActive(true);
     }
@@ -59,7 +60,6 @@ public class CanvasManager : MonoBehaviour
     }
     public void Game()
     {
-        Debug.Log("HOLA");
         startMenu.SetActive(false);
         tutorial1.SetActive(false);
         tutorial2.SetActive(false);
