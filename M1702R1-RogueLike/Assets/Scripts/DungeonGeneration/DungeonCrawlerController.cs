@@ -13,6 +13,7 @@ public enum Direction
 public class DungeonCrawlerController : MonoBehaviour
 {
     public static List<Vector2Int> positionsVisited = new();
+
     private static readonly Dictionary<Direction, Vector2Int> directionMovementMap = new()
     {
         {Direction.top, Vector2Int.up },
