@@ -25,6 +25,7 @@ public class DialogoUI : MonoBehaviour
                 language = _dialog.dialogoIng;
                 break;
         }
+        dialogoPanel.SetActive(false);
     }
     public void continueDialog()
     {

@@ -16,6 +16,11 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] public GameObject tutorial1;
     [Header("Tutorial2")]
     [SerializeField] public GameObject tutorial2;
+    [Header("Hud")]
+    [SerializeField] public GameObject Hud;
+
+    [Header("Game Over")]
+    public GameObject gameOverUI;
     //[Header("Pause")]
 
     //[Header("GameOver")]
@@ -26,20 +31,22 @@ public class CanvasManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    //void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //    else Destroy(gameObject);
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
 
-    //    Time.timeScale = 0f;
+        //Time.timeScale = 0f;
 
-    //    musicSlider.value = musicSource.volume;
-    //    sfxSlider.value = sfxSource.volume;
-    //}
+        //musicSlider.value = musicSource.volume;
+        //sfxSlider.value = sfxSource.volume;
+    }
 
     public void DisableStart()
     {
@@ -58,13 +65,29 @@ public class CanvasManager : MonoBehaviour
         tutorial2.SetActive(true);
         Time.timeScale = 1f;
     }
+    public void volver()
+    {
+        tutorial2.SetActive(false);
+        tutorial1.SetActive(true);
+        Time.timeScale = 1f;
+    }
     public void Game()
     {
         startMenu.SetActive(false);
         tutorial1.SetActive(false);
         tutorial2.SetActive(false);
+        Hud.SetActive(true);
         Time.timeScale = 1f;
 
+    }
+    public void activeGameOver()
+    {
+        startMenu.SetActive(false);
+        tutorial1.SetActive(false);
+        tutorial2.SetActive(false);
+        Hud.SetActive(false);
+        gameOverUI.SetActive(true);
+        Time.timeScale = 0f;
     }
     //public void SetGameOver()
     //{
