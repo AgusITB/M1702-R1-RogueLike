@@ -20,6 +20,8 @@ public class Player : Character, ICollector
 
     public GameObject gotHitScreen;
 
+    
+
 
     protected override void Awake()
     {
@@ -52,6 +54,12 @@ public class Player : Character, ICollector
         if (maxHp + hpValue > 50) return;
         else maxHp += hpValue;
         Debug.Log(maxHp);
+    }
+    public override void Die()
+    {
+        base.Die();
+        CanvasManager.instance.activeGameOver();
+
     }
     public void TakeItem(ItemSO itemInfo, Item item)
     {
