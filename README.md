@@ -55,7 +55,7 @@ Los jugadores podrán acceder a una tienda al comienzo de cada piso donde podrá
 
 Los controles principales son los siguientes:
 
-<img src="M1702R1-RogueLike/images/Controles1.webp" alt="Logo" width="600" height="400">
+<img src="M1702R1-RogueLike/images/Controles1.webp" alt="Logo" width="1000" height="400">
 <img src="M1702R1-RogueLike/images/Controles2.webp" alt="Logo" width="400" height="400">
 
 
