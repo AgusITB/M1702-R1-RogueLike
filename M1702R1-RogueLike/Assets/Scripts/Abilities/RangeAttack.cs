@@ -15,6 +15,8 @@ public class RangeAttack : Ability
 
     private PlayerAnimation pAnimation;
 
+    
+
     protected override void Awake()
     {
         base.Awake();

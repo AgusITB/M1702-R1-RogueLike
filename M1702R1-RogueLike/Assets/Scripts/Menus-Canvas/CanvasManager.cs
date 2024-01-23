@@ -21,12 +21,6 @@ public class CanvasManager : MonoBehaviour
 
     [Header("Game Over")]
     public GameObject gameOverUI;
-    //[Header("Pause")]
-
-    //[Header("GameOver")]
-    //[SerializeField] public GameObject gameoverMenu;
-    //[Header("Settings")]
-    //[SerializeField] public GameObject settingsMenu;
 
 
 
@@ -41,11 +35,6 @@ public class CanvasManager : MonoBehaviour
         {
             instance = this;
         }
-
-        //Time.timeScale = 0f;
-
-        //musicSlider.value = musicSource.volume;
-        //sfxSlider.value = sfxSource.volume;
     }
 
     public void DisableStart()
@@ -89,23 +78,6 @@ public class CanvasManager : MonoBehaviour
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
     }
-    //public void SetGameOver()
-    //{
-    //    pauseButton.SetActive(false);
-    //    gameoverMenu.SetActive(true);
-    //}
-    //public void Restart()
-    //{
-    //    SceneManager.LoadScene(1);
-    //    StartCoroutine(DesactivateGameOverUI());
-    //}
-    //IEnumerator DesactivateGameOverUI()
-    //{
-    //    yield return 0;
-    //    gameoverMenu.SetActive(false);
-    //    pauseButton.SetActive(true);
-    //    Time.timeScale = 1f;
-    //}
     public void ExitGame()
     {
         Application.Quit();
