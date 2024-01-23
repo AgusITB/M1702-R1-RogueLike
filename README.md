@@ -69,6 +69,6 @@ Agustín Garibotto Villanueva  - agustin.garibotto.7e6@itb.cat
 
 Samuel Arteaga Colmenares - samuel.arteaga.7e6@itb.cat
 
-Link al projecte: [https://github.com/your_username/repo_name](https://github.com/AgusITB/M1702-R1-RogueLike/tree/main)
+Link al projecte: [Roguelike](https://github.com/AgusITB/M1702-R1-RogueLike/tree/main)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
