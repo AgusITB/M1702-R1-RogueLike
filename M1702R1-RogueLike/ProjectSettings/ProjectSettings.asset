@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: "SamuelAgust\xEDn"
   productName: M1702R1-RogueLike
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}

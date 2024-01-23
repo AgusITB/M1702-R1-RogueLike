@@ -1,9 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
-
 public class EnergyBall : MonoBehaviour
 {
     private Animator animatorController;
