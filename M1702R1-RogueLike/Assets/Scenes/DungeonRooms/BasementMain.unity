@@ -495,7 +495,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 233748114}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 709246195}
+        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &233748114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,6 +876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346383479}
   - component: {fileID: 346383480}
+  - component: {fileID: 346383481}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -992,6 +1005,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &346383481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346383478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6869a91a8e67c944a79d612d3bdc4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &355806631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,7 +1364,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 458238255}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 709246195}
+        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
+        m_MethodName: Reload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &458238255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2123,7 +2160,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e82507559e5e85049bc141d98e3629d7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.453
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -16797,8 +16834,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: 3.56, y: -2}
+  m_SizeDelta: {x: 1912.87, y: 1075.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &422465101691625622
 MonoBehaviour:

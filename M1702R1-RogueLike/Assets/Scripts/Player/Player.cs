@@ -20,7 +20,7 @@ public class Player : Character, ICollector
 
     public GameObject gotHitScreen;
 
-    
+    private AudioSource audioSource;
 
 
     protected override void Awake()
@@ -37,6 +37,7 @@ public class Player : Character, ICollector
         maxHp = 100;
         Money = 100;
         currentHp = maxHp;
+        audioSource = GetComponent<AudioSource>();
         healthBar = GameObject.FindGameObjectWithTag("playerHealthBar").GetComponent<EnemyHealthBar>();
     }
     public void UpgradeSlash(int damageAmount)
@@ -58,6 +59,7 @@ public class Player : Character, ICollector
     public override void Die()
     {
         base.Die();
+        audioSource.mute = true;
         CanvasManager.instance.activeGameOver();
 
     }

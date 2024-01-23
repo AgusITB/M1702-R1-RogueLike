@@ -86,4 +86,8 @@ public class CanvasManager : MonoBehaviour
 #endif
 
     }
+    public void Reload()
+    {
+        SceneManager.LoadScene("BasementMain");
+    }
 }

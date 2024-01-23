@@ -13,6 +13,7 @@ public class NextLevel : MonoBehaviour
         Instance = this;
         this.transform.SetParent(GameObject.FindGameObjectWithTag("PortalParent").transform, true);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
