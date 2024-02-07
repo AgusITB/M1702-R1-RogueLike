@@ -55,7 +55,7 @@ public class Player : Character, ICollector
     {
         base.Die();
         audioSource.mute = true;
-        CanvasManager.instance.activeGameOver();
+        CanvasManager.instance.ActiveGameOver();
 
     }
     public void TakeItem(ItemSO itemInfo, Item item)

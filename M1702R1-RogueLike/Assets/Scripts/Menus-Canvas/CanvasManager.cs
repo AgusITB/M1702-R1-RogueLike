@@ -5,13 +5,13 @@ public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager instance;
     [Header("Start")]
-    [SerializeField] public GameObject startMenu;
+    public GameObject startMenu;
     [Header("Tutorial1")]
-    [SerializeField] public GameObject tutorial1;
+    public GameObject tutorial1;
     [Header("Tutorial2")]
-    [SerializeField] public GameObject tutorial2;
+    public GameObject tutorial2;
     [Header("Hud")]
-    [SerializeField] public GameObject Hud;
+    public GameObject Hud;
 
     [Header("Game Over")]
     public GameObject gameOverUI;
@@ -33,7 +33,7 @@ public class CanvasManager : MonoBehaviour
 
     public void DisableStart()
     {
-        Debug.Log("HOLA");
+      
         startMenu.SetActive(false);
         tutorial1.SetActive(true);
     }
@@ -48,7 +48,7 @@ public class CanvasManager : MonoBehaviour
         tutorial2.SetActive(true);
         Time.timeScale = 1f;
     }
-    public void volver()
+    public void Volver()
     {
         tutorial2.SetActive(false);
         tutorial1.SetActive(true);
@@ -63,7 +63,7 @@ public class CanvasManager : MonoBehaviour
         Time.timeScale = 1f;
 
     }
-    public void activeGameOver()
+    public void ActiveGameOver()
     {
         startMenu.SetActive(false);
         tutorial1.SetActive(false);
